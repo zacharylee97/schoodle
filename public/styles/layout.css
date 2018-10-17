@@ -1,6 +1,14 @@
 body {
-  background-color: #EEE;
+  background-color: White;
   font-family: "Comfortaa", cursive;
+}
+
+body nav {
+  background-color: #EEE;
+}
+
+body nav span {
+  font-size: 1.5rem;
 }
 
 body h1 {
