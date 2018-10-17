@@ -53,6 +53,11 @@ app.get("/event/unique_url", (req, res) => {
   res.render("event");
 });
 
+// Post new event
+app.post("/event/new", (req, res) => {
+  res.redirect("unique_url");
+})
+
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });

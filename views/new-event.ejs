@@ -16,5 +16,12 @@
 
   <body>
     <h1>Create A New Event!</h1>
+    <form method="POST" action="/event/new">
+      <input class="form-control" type="title" name="title" placeholder="Event title">
+      <input class="form-control" type="description" name="description" placeholder="Event description">
+      <input class="form-control" type="name" name="name" placeholder="Name">
+      <input class="form-control" type="email" name="email" placeholder="Email">
+      <button type="Submit" value="Submit">Submit</button>
+    </form>
   </body>
 </html>
