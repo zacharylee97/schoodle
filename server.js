@@ -36,7 +36,7 @@ app.use("/styles", sass({
 app.use(express.static("public"));
 
 // Mount all resource routes
-app.use("/api/users", eventRoutes(knex));
+app.use("/events", eventRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
@@ -45,21 +45,6 @@ app.get("/", (req, res) => {
 
 app.get("/home", (req, res) => {
   res.render("index");
-});
-
-// Create new event page
-app.get("/event/new", (req, res) => {
-  res.render("new-event");
-});
-
-// Post new event
-app.post("/event/new", (req, res) => {
-  res.redirect("unique_url");
-})
-
-// Event page
-app.get("/event/unique_url", (req, res) => {
-  res.render("event");
 });
 
 app.listen(PORT, () => {
