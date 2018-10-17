@@ -43,6 +43,11 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+// Create new event page
+app.get("/event/new", (req, res) => {
+  res.render("new-event");
+});
+
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
