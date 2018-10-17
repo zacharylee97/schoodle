@@ -6,8 +6,9 @@ exports.up = function (knex, Promise) {
       table.integer('attendees_id');
       table.foreign('events_id').references('id').inTable('events');
       table.foreign('attendees_id').references('id').inTable('attendees');
-      table.date('time_start');
-      table.date('time_end');
+      table.datetime('time_start');
+      table.datetime('time_end');
+      table.timestamps(true, true);
     })
   ])
 };
