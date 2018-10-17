@@ -1,5 +1,4 @@
 $(() => {
-  console.log('document ready');
   function generateRandomString(lengthURL) {
     const possibleChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
     let randomURL = "";
@@ -9,11 +8,9 @@ $(() => {
     return randomURL;
   }
 
-
   $('.new-event-form').on('submit', function (e) {
     e.preventDefault();
     let uniqueUrl = generateRandomString(12);
-    console.log(uniqueUrl);
     $.ajax({
       method: "POST",
       url: "/events",
@@ -26,8 +23,8 @@ $(() => {
         time_end: new Date(),
         unique_url: uniqueUrl
       }
-    }).done((url) => {
-      window.location.href = `/events/${url}`;
+    }).done(() => {
+      window.location.href = `/events/${uniqueUrl}`;
     });;
   })
 
