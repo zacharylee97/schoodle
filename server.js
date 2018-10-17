@@ -48,6 +48,11 @@ app.get("/event/new", (req, res) => {
   res.render("new-event");
 });
 
+// Event page
+app.get("/event/unique_url", (req, res) => {
+  res.render("event");
+});
+
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
