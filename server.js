@@ -40,6 +40,10 @@ app.use("/api/users", usersRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
+  res.redirect("home");
+});
+
+app.get("/home", (req, res) => {
   res.render("index");
 });
 
@@ -48,15 +52,15 @@ app.get("/event/new", (req, res) => {
   res.render("new-event");
 });
 
-// Event page
-app.get("/event/unique_url", (req, res) => {
-  res.render("event");
-});
-
 // Post new event
 app.post("/event/new", (req, res) => {
   res.redirect("unique_url");
 })
+
+// Event page
+app.get("/event/unique_url", (req, res) => {
+  res.render("event");
+});
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
