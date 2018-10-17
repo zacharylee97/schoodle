@@ -1,13 +1,18 @@
 body {
   background-color: White;
   font-family: "Comfortaa", cursive;
-  nav {
-    background-color: #EEE;
-    span {
-      font-size: 1.5rem;
-    }
-  }
+  width: 55%;
+  margin: 0 auto;
+
   h1 {
     color: #244751;
+  }
+}
+
+nav {
+  width: 100%;
+  background-color: #EEE;
+  span {
+    font-size: 1.5rem;
   }
 }
