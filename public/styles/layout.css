@@ -2,15 +2,18 @@ body {
   background-color: White;
   font-family: "Comfortaa", cursive;
 }
+
 body main {
   width: 55%;
   margin: 0 auto;
 }
+
 body main .calendar {
   text-align: center;
   width: 50%;
   margin: 0 auto;
 }
+
 body h1 {
   color: #244751;
 }
@@ -19,8 +22,7 @@ nav {
   width: 100%;
   background-color: #EEE;
 }
+
 nav span {
   font-size: 1.5rem;
 }
-
-/*# sourceMappingURL=layout.css.map */
