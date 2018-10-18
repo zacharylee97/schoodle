@@ -17,7 +17,7 @@ $(() => {
   //Post to db on form submission
   $('.new-event-form').on('submit', function (e) {
     e.preventDefault();
-    let formValid = checkForm();
+    const formValid = checkForm();
     if (formValid) {
       let uniqueUrl = generateRandomString(12);
       $.ajax({
@@ -43,4 +43,22 @@ $(() => {
   $("#new-event-btn").click(function () {
     window.location.href = "/events/new";
   });
+
+  $(".event-details").ready(function () {
+    const URL = window.location.href;
+    const uniqueURL = URL.slice(-12);
+    $.ajax({
+      method: "GET",
+      url: `/events/${uniqueURL}/info`
+    })
+    .done((result) => {
+      const title = result[0].title;
+      const description = result[0].description;
+      let eventDetails =
+      `<h1>Event Details</h1>
+      <p>${title}</p>
+      <p>${description}</p>`;
+      $(".event-details").append(eventDetails);
+    })
+  })
 });

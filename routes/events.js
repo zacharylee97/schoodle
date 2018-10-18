@@ -4,6 +4,15 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = (knex) => {
+  // Create new event page
+  router.get("/new", (req, res) => {
+    res.render("new-event");
+  });
+
+  // Event page
+  router.get("/:unique_url", (req, res) => {
+    res.render("event");
+  });
   // Post new event
   router.post("/", (req, res) => {
     const dateStart = new Date(req.body.time_start);
@@ -64,15 +73,15 @@ module.exports = (knex) => {
         res.json(re);
       })
   });
-
-  // Create new event page
-  router.get("/new", (req, res) => {
-    res.render("new-event");
-  });
-
-  // Event page
-  router.get("/:unique_url", (req, res) => {
-    res.render("event");
+  //Retrieve info from database
+  router.get("/:unique_url/info", (req, res) => {
+    knex.select('title', 'description').from('events').where('unique_url', req.params.unique_url)
+    .catch(err => {
+      console.error(err)
+    })
+    .then((result) => {
+      res.json(result);
+    });
   });
 
   return router;
