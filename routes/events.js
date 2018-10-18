@@ -6,6 +6,22 @@ const router = express.Router();
 module.exports = (knex) => {
   // Post new event
   router.post("/", (req, res) => {
+    const dateStart = new Date(req.body.time_start);
+    const dateEnd = new Date(req.body.time_end);
+    const timeStart =
+      [dateStart.getMonth() + 1,
+      dateStart.getDate(),
+      dateStart.getFullYear()].join('-') + ' ' +
+      [dateStart.getHours(),
+      dateStart.getMinutes(),
+      dateStart.getSeconds()].join(':');
+    const timeEnd =
+      [dateEnd.getMonth() + 1,
+      dateEnd.getDate(),
+      dateEnd.getFullYear()].join('-') + ' ' +
+      [dateEnd.getHours(),
+      dateEnd.getMinutes(),
+      dateEnd.getSeconds()].join(':');
     return Promise.all([
       knex('events')
         .insert({
@@ -17,8 +33,8 @@ module.exports = (knex) => {
           return knex('times')
             .insert({
               events_id: foreignEventsId,
-              time_start: req.body.time_start,
-              time_end: req.body.time_end
+              time_start: timeStart,
+              time_end: timeEnd
             })
         }),
       knex('attendees')
