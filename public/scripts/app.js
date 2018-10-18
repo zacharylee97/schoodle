@@ -43,7 +43,7 @@ $(() => {
   $("#new-event-btn").click(function () {
     window.location.href = "/events/new";
   });
-
+  //Load event details for event
   if ($(".event-details").length > 0) {
     const URL = window.location.href;
     const uniqueURL = URL.slice(-12);
@@ -58,21 +58,27 @@ $(() => {
           `<h1>Event Details</h1>
       <p>Event title: ${title}</p>
       <p>Event description: ${description}</p>`;
-<<<<<<< HEAD
       $(".event-details").prepend(eventDetails);
     })
-  }
-=======
-        $(".event-details").append(eventDetails);
-      })
+      console.log(result);
+    //   const timeslots =
+    //   `<table class="table-bordered">
+    //     <tr>
+    //       <th></th>
+    //       <th>Oct 18 Thu</th>
+    //       <th>Oct 19 Fri</th>
+    //       <th>Oct 20 Sat</th>
+    //     </tr>
+    //     <tr>
+    //       <td>Bob</td>
+    //       <td><input type="checkbox"></td>
+    //       <td><input type="checkbox"></td>
+    //       <td><input type="checkbox"></td>
+    //     </tr>
+    //   </table>`;
+    //   $(".time-slots").append(timeslots);
   };
-
   $('.calendar').on('click', '.calendarCell', function () {
-<<<<<<< HEAD
     $(this).toggleClass('calendarSelectedCell');
-=======
-    $(this).addClass('calendarSelectedCell');
->>>>>>> 79e67f4717736076ddc11d56769e8921c68f8de9
   });
->>>>>>> feature/new-event
 });
