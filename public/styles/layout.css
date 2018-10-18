@@ -14,14 +14,11 @@ body main .calendar {
   margin: 0 auto;
 }
 
-<<<<<<< HEAD
-=======
 body main .calendarHeader {
   margin: 10px auto;
   text-align: center;
 }
 
->>>>>>> Added font-awesome to get small icons
 body h1 {
   color: #244751;
 }
