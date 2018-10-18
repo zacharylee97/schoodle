@@ -23,16 +23,17 @@ body {
       min-width:800px;
       text-align:center;
     }
+  }
+
+.new-event {
+    width: 55%;
+    margin: 0 auto;
 
     .calendar {
       text-align: center;
-      width: 50%;
+      width: 10px;
       margin: 0 auto;
     }
-  }
-
-  h1 {
-    color: #244751;
   }
 }
 
