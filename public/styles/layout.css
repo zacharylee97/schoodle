@@ -39,6 +39,11 @@ body .new-event .calendar {
   margin: 0 auto;
 }
 
+body .event-details {
+  width: 55%;
+  margin: 0 auto;
+}
+
 nav {
   width: 100%;
   background-color: #EEE;
