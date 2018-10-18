@@ -3,32 +3,32 @@ body {
   font-family: "Comfortaa", cursive;
 }
 
-body main {
+body .homepage {
   display: flex;
   flex-direction: row;
 }
 
-body main .leftbg {
+body .homepage .leftbg {
   background-image: url(autumn_forest.jpg);
   filter: opacity(50%);
 }
 
-body main .rightbg {
+body .homepage .rightbg {
   background-image: url(autumn_forest.jpg);
   filter: opacity(50%);
 }
 
-body main div {
+body .homepage div {
   height: 680px;
   width: 400px;
 }
 
-body main div:nth-of-type(2) {
+body .homepage div:nth-of-type(2) {
   min-width: 800px;
   text-align: center;
 }
 
-body main .calendar {
+body .homepage .calendar {
   text-align: center;
   width: 50%;
   margin: 0 auto;
