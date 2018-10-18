@@ -58,7 +58,7 @@ $(() => {
       `<h1>Event Details</h1>
       <p>Event title: ${title}</p>
       <p>Event description: ${description}</p>`;
-      $(".event-details").append(eventDetails);
+      $(".event-details").prepend(eventDetails);
     })
   }
 });
