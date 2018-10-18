@@ -56,8 +56,8 @@ $(() => {
       const description = result[0].description;
       let eventDetails =
       `<h1>Event Details</h1>
-      <p>${title}</p>
-      <p>${description}</p>`;
+      <p>Event title: ${title}</p>
+      <p>Event description: ${description}</p>`;
       $(".event-details").append(eventDetails);
     })
   }
