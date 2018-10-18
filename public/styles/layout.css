@@ -1,3 +1,12 @@
+nav {
+  width: 100%;
+  background-color: #EEE;
+}
+
+nav span {
+  font-size: 1.5rem;
+}
+
 body {
   background-color: White;
   font-family: "Comfortaa", cursive;
@@ -44,11 +53,8 @@ body .event-details {
   margin: 0 auto;
 }
 
-nav {
-  width: 100%;
-  background-color: #EEE;
-}
-
-nav span {
-  font-size: 1.5rem;
+.time-slots {
+  width: 500px;
+  text-align: center;
+  border-style: solid black;
 }
