@@ -2,8 +2,8 @@
 
 function showCalendar(){
 
-  let calendar = 
-  `<table>
+  let calendar =
+  `<table class="calendar">
   <tr>
     <th>Su</th>
     <th>Mo</th>
@@ -59,5 +59,5 @@ function showCalendar(){
     <td>3</td>
   </tr>
   </table>`
-  $('body').append(calendar);
+  $('main').append(calendar);
 }

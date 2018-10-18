@@ -1,9 +1,14 @@
 body {
   background-color: White;
   font-family: "Comfortaa", cursive;
-  main{
+  main {
     width: 55%;
     margin: 0 auto;
+    .calendar {
+      text-align: center;
+      width: 50%;
+      margin: 0 auto;
+    }
   }
   h1 {
     color: #244751;
