@@ -4,14 +4,15 @@ var calendar = "";
 
 // Appends the calendar to the main
 function showCalendar() {
+  $('.calendar').empty();
+  calendar = '';
   createCalendar();
-  return $('main').append(calendar);
+  $('.calendar').append(calendar);
 }
 
 // Adds the week days as a header to a table
 function calendarHeader() {
-  return calendar += `
-  <tr>
+  return calendar += `<tr>
     <th>Su</th>
     <th>Mo</th>
     <th>Tu</th>
@@ -30,7 +31,6 @@ function firstOfTheMonth(date) {
 
 // Call in with today() to get the first month of today"s month
 function lastOfTheMonth(date) {
-  console.log(new Date(date.getFullYear(), date.getMonth() + 1, 0));
   return new Date(new Date(date.getFullYear(), date.getMonth() + 1, 0));
 }
 
@@ -67,7 +67,6 @@ function daysDuringMonth(date) {
 // Adds each days before the calendar month to the calendar call with the result of
 // dayOfTheWeek(firstOfTheMonth)
 function daysAfterMonth(lastOfMonthDay) {
-  console.log(dayOfTheWeek(lastOfMonthDay));
   for (var i = 1; i < 7 - dayOfTheWeek(lastOfMonthDay); i++) {
     calendar += `<td class="calendarCell calendarOutsideMonth">${i}</td>`
   }
@@ -77,8 +76,11 @@ function daysAfterMonth(lastOfMonthDay) {
 // Main function that calls the other function to fill the calendar variable
 function createCalendar() {
   var calendarDate = new Date();
-  // Start of the Calendar
-  calendar += `<table class="calendar">`;
+  var months = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  $('.calendarDate').text(`${months[calendarDate.getMonth()]}, ${calendarDate.getDate()}`);
+
+  //Start of Calendar
+  // calendar += `<table class="calendar">`
 
   // Adding in the header (2 letters per <th>)
   calendarHeader();
@@ -92,6 +94,6 @@ function createCalendar() {
   //Adding the days after the month
   daysAfterMonth(lastOfTheMonth(calendarDate));
 
-  // End of the Calendar
-  return calendar += `</table>`;
+  //End of Calendar
+  // calendar += `</table>`
 }

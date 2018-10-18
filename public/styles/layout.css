@@ -39,9 +39,19 @@ body .new-event .calendar {
   margin: 0 auto;
 }
 
+<<<<<<< HEAD
 body .event-details {
   width: 55%;
   margin: 0 auto;
+=======
+body main .calendarHeader {
+  margin: 10px auto;
+  text-align: center;
+}
+
+body h1 {
+  color: #244751;
+>>>>>>> view/new-event
 }
 
 nav {
