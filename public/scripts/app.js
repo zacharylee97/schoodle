@@ -44,7 +44,7 @@ $(() => {
     window.location.href = "/events/new";
   });
 
-  $(".event-details").ready(function () {
+  if ($(".event-details").length > 0) {
     const URL = window.location.href;
     const uniqueURL = URL.slice(-12);
     $.ajax({
@@ -60,5 +60,5 @@ $(() => {
       <p>${description}</p>`;
       $(".event-details").append(eventDetails);
     })
-  })
+  }
 });
