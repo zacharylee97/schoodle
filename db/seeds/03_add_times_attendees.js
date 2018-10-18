@@ -5,14 +5,14 @@ exports.seed = function(knex, Promise) {
       .then(function () {
         return knex('times_attendees').insert([
           { times_id: 1, attendees_id: 1},
-          { times_id: 1, attendees_id: 1},
-          { times_id: 1, attendees_id: 2},
-          { times_id: 1, attendees_id: 3},
           { times_id: 2, attendees_id: 1},
-          { times_id: 2, attendees_id: 3},
-          { times_id: 3, attendees_id: 1},
           { times_id: 3, attendees_id: 2},
-          { times_id: 3, attendees_id: 3},
+          { times_id: 4, attendees_id: 3},
+          { times_id: 5, attendees_id: 1},
+          { times_id: 6, attendees_id: 3},
+          { times_id: 7, attendees_id: 1},
+          { times_id: 8, attendees_id: 2},
+          { times_id: 9, attendees_id: 3},
         ])
       })
 };
