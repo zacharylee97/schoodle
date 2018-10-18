@@ -63,6 +63,10 @@ $(() => {
   };
 
   $('.calendar').on('click', '.calendarCell', function () {
+<<<<<<< HEAD
     $(this).toggleClass('calendarSelectedCell');
+=======
+    $(this).addClass('calendarSelectedCell');
+>>>>>>> 79e67f4717736076ddc11d56769e8921c68f8de9
   });
 });
