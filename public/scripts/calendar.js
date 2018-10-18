@@ -1,9 +1,16 @@
 "use strict";
 
-function showCalendar(){
+var calendar;
 
-  let calendar =
-  `<table class="calendar">
+// Appends the calendar to the main 
+function showCalendar() {
+  createCalendar();
+  return $('main').append(calendar);
+}
+
+// Adds the week days as a header to a table
+function calendarHeader() {
+  return calendar += `
   <tr>
     <th>Su</th>
     <th>Mo</th>
@@ -13,51 +20,78 @@ function showCalendar(){
     <th>Fr</th>
     <th>Sa</th>
   </tr>
-  <tr>
-    <td>30</td>
-    <td>1</td>
-    <td>2</td>
-    <td>3</td>
-    <td>4</td>
-    <td>5</td>
-    <td>6</td>
-  </tr>
-  <tr>
-    <td>7</td>
-    <td>8</td>
-    <td>9</td>
-    <td>10</td>
-    <td>11</td>
-    <td>12</td>
-    <td>13</td>
-  </tr>
-  <tr>
-    <td>14</td>
-    <td>15</td>
-    <td>16</td>
-    <td>17</td>
-    <td>18</td>
-    <td>19</td>
-    <td>20</td>
-  </tr>
-  <tr>
-    <td>21</td>
-    <td>22</td>
-    <td>23</td>
-    <td>24</td>
-    <td>25</td>
-    <td>26</td>
-    <td>27</td>
-  </tr>
-  <tr>
-    <td>28</td>
-    <td>29</td>
-    <td>30</td>
-    <td>31</td>
-    <td>1</td>
-    <td>2</td>
-    <td>3</td>
-  </tr>
-  </table>`
-  $('main').append(calendar);
+  `;
+}
+
+// Call in with today() to get the first month of today"s month
+function firstOfTheMonth(date) {
+  return new Date(date.getFullYear(), date.getMonth(), 1)
+}
+
+// Call in with today() to get the first month of today"s month
+function lastOfTheMonth(date) {
+  console.log(new Date(date.getFullYear(), date.getMonth() + 1, 0));
+  return new Date(new Date(date.getFullYear(), date.getMonth() + 1, 0));
+}
+
+//Returns the day of the week (0-6)
+function dayOfTheWeek(date) {
+  return date.getDay();
+}
+
+// Return the amount of days in a month
+function daysInMonth(year, month) {
+  return new Date(year, month + 1, 0).getDate();
+}
+
+// Adds each days before the calendar month to the calendar call with the result of
+// dayOfTheWeek(firstOfTheMonth)
+function daysBeforeMonth(firstOfMonthDay, date) {
+  calendar += `<tr>`;
+  for (var i = firstOfMonthDay - 1; i >= 0; i--) {
+    calendar += `<td class="calendarCell calendarOutsideMonth">${daysInMonth(date.getFullYear(), date.getMonth() - 1) - i}</td>`
+  }
+}
+
+// Adds each days on the calendar of the selected month
+function daysDuringMonth(date) {
+  var monthLength = daysInMonth(date.getFullYear(), date.getMonth());
+  for (var i = 1; i <= monthLength; i++) {
+    calendar += `<td class="calendarCell">${i}</td>`
+    if (dayOfTheWeek(new Date(date.getFullYear(), date.getMonth(), i)) === 6) {
+      calendar += `</tr><tr>`;
+    }
+  }
+}
+
+// Adds each days before the calendar month to the calendar call with the result of
+// dayOfTheWeek(firstOfTheMonth)
+function daysAfterMonth(lastOfMonthDay) {
+  console.log(dayOfTheWeek(lastOfMonthDay));
+  for (var i = 1; i < 7 - dayOfTheWeek(lastOfMonthDay); i++) {
+    calendar += `<td class="calendarCell calendarOutsideMonth">${i}</td>`
+  }
+  calendar += `</tr>`;
+}
+
+// Main function that calls the other function to fill the calendar variable
+function createCalendar() {
+  var calendarDate = new Date();
+  // Start of the Calendar
+  calendar += `<table class="calendar">`;
+
+  // Adding in the header (2 letters per <th>)
+  calendarHeader();
+
+  // Adding the days before the first of the month
+  daysBeforeMonth(dayOfTheWeek(firstOfTheMonth(calendarDate)), calendarDate);
+
+  // Adding the days during the month
+  daysDuringMonth(calendarDate);
+
+  //Adding the days after the month
+  daysAfterMonth(lastOfTheMonth(calendarDate));
+
+  // End of the Calendar
+  return calendar += `</table>`;
 }
