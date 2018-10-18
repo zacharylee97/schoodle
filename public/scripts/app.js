@@ -51,14 +51,18 @@ $(() => {
       method: "GET",
       url: `/events/${uniqueURL}/info`
     })
-    .done((result) => {
-      const title = result[0].title;
-      const description = result[0].description;
-      let eventDetails =
-      `<h1>Event Details</h1>
+      .done((result) => {
+        const title = result[0].title;
+        const description = result[0].description;
+        let eventDetails =
+          `<h1>Event Details</h1>
       <p>Event title: ${title}</p>
       <p>Event description: ${description}</p>`;
-      $(".event-details").append(eventDetails);
-    })
-  }
+        $(".event-details").append(eventDetails);
+      })
+  };
+
+  $('.calendar').on('click', '.calendarCell', function () {
+    $(this).addClass('calendarSelectedCell');
+  });
 });

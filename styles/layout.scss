@@ -28,15 +28,19 @@ body {
   .new-event {
     width: 55%;
     margin: 0 auto;
+    text-align: center;
 
     .calendar {
-      text-align: center;
       width: 10px;
       margin: 0 auto;
+
+      .calendarSelectedCell {
+        border: 1px solid #000;
+        border-radius: 50%;
+      }
     }
     .calendarHeader {
       margin: 10px auto;
-      text-align: center;
     }
   }
   .event-details {
