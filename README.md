@@ -13,7 +13,7 @@
 7. Run the server: `npm run local`
 8. Visit `http://localhost:8080/`
 
-## Functionnalities to Implement
+## Functionalities to Implement
 * visitors can create an event proposal in much the same way as Doodle, by specifying:
   * event title and description
   * their own name and email
