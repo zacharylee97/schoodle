@@ -4,8 +4,28 @@ body {
 }
 
 body main {
-  width: 55%;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+}
+
+body main .leftbg {
+  background-image: url(autumn_forest.jpg);
+  filter: opacity(50%);
+}
+
+body main .rightbg {
+  background-image: url(autumn_forest.jpg);
+  filter: opacity(50%);
+}
+
+body main div {
+  height: 680px;
+  width: 400px;
+}
+
+body main div:nth-of-type(2) {
+  min-width: 800px;
+  text-align: center;
 }
 
 body main .calendar {

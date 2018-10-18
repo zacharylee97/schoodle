@@ -1,15 +1,36 @@
 body {
   background-color: White;
   font-family: "Comfortaa", cursive;
+
   main {
-    width: 55%;
-    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+
+    .leftbg {
+      background-image: url(autumn_forest.jpg);
+      filter: opacity(50%);
+    }
+    .rightbg {
+      background-image: url(autumn_forest.jpg);
+      filter: opacity(50%);
+    }
+
+    div {
+      height: 680px;
+      width: 400px;
+    }
+    div:nth-of-type(2){
+      min-width:800px;
+      text-align:center;
+    }
+
     .calendar {
       text-align: center;
       width: 50%;
       margin: 0 auto;
     }
   }
+
   h1 {
     color: #244751;
   }
