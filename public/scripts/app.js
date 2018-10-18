@@ -43,7 +43,7 @@ $(() => {
   $("#new-event-btn").click(function () {
     window.location.href = "/events/new";
   });
-
+  //Load event details for event
   if ($(".event-details").length > 0) {
     const URL = window.location.href;
     const uniqueURL = URL.slice(-12);
@@ -61,4 +61,27 @@ $(() => {
       $(".event-details").prepend(eventDetails);
     })
   }
+  // Load timeslots table for event
+  $(".time-slots").ready(function() {
+    $.ajax({
+      method: "GET",
+      url: `/events/${uniqueURL}/info`
+    })
+    const timeslots =
+    `<table class="table-bordered">
+      <tr>
+        <th></th>
+        <th>Oct 18 Thu</th>
+        <th>Oct 19 Fri</th>
+        <th>Oct 20 Sat</th>
+      </tr>
+      <tr>
+        <td>Bob</td>
+        <td><input type="checkbox"></td>
+        <td><input type="checkbox"></td>
+        <td><input type="checkbox"></td>
+      </tr>
+    </table>`;
+    $(".time-slots").append(timeslots);
+  })
 });
