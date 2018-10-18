@@ -52,31 +52,44 @@ $(() => {
       url: `/events/${uniqueURL}/info`
     })
     .done((result) => {
-      // const title = result[0].title;
-      // const description = result[0].description;
-      // let eventDetails =
-      // `<h1>Event Details</h1>
-      // <p>Event title: ${title}</p>
-      // <p>Event description: ${description}</p>`;
-      // $(".event-details").prepend(eventDetails);
-      // Load timeslots table for event
       console.log(result);
-    //   const timeslots =
-    //   `<table class="table-bordered">
-    //     <tr>
-    //       <th></th>
-    //       <th>Oct 18 Thu</th>
-    //       <th>Oct 19 Fri</th>
-    //       <th>Oct 20 Sat</th>
-    //     </tr>
-    //     <tr>
-    //       <td>Bob</td>
-    //       <td><input type="checkbox"></td>
-    //       <td><input type="checkbox"></td>
-    //       <td><input type="checkbox"></td>
-    //     </tr>
-    //   </table>`;
-    //   $(".time-slots").append(timeslots);
+      //Display event details
+      const title = result[0].title;
+      const description = result[0].description;
+      const eventDetails =
+      `<h1>Event Details</h1>
+      <p>Event title: ${title}</p>
+      <p>Event description: ${description}</p>`;
+      $(".event-details").prepend(eventDetails);
+
+      //Display participants
+      const names = [];
+      result.forEach(function(element) {
+        names.push(element.name);
+      });
+      const attendees = [...new Set(names)];
+
+      // Load timeslots table for event
+      let timeslots =
+      `<tr>
+          <th></th>
+          <th>Oct 18 Thu</th>
+          <th>Oct 19 Fri</th>
+          <th>Oct 20 Sat</th>
+        </tr>
+      `;
+      $(".time-slots").append(timeslots);
+
+      attendees.forEach(function(element) {
+      let newAttendee =
+      `<tr>
+        <td>${element}</td>
+        <td><input type="checkbox"></td>
+        <td><input type="checkbox"></td>
+        <td><input type="checkbox"></td>
+      </tr>`
+      $(".time-slots").append(newAttendee);
+      });
     });
   }
 });
