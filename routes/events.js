@@ -22,6 +22,7 @@ module.exports = (knex) => {
       [dateEnd.getHours(),
       dateEnd.getMinutes(),
       dateEnd.getSeconds()].join(':');
+
     return Promise.all([
       knex('events')
         .insert({
@@ -41,7 +42,28 @@ module.exports = (knex) => {
         .insert({
           name: req.body.name,
           email: req.body.email
+        }, 'id')
+        .then(([foreignAttendeesId]) => {
+          return knex('times_attendees')
+            .insert({
+              // I tried with .max('id').from('times")
+              // This returns the unique_url for some reason
+              // I want to take the id from event if it's the newly created
+              times_id: knex
+                .select('id')
+                .from('times')
+                .where({
+                  events_id: knex
+                    .select('id')
+                    .from('events')
+                    .where({
+                      unique_url: req.body.unique_url
+                    })
+                }),
+              attendees_id: foreignAttendeesId
+            })
         })
+
     ])
       .catch(err => {
         console.error(err)
