@@ -1,63 +1,44 @@
 "use strict";
 
-function showCalendar(){
+var calendar;
 
-  let calendar =
-  `<table class="calendar">
-  <tr>
-    <th>Su</th>
-    <th>Mo</th>
-    <th>Tu</th>
-    <th>We</th>
-    <th>Th</th>
-    <th>Fr</th>
-    <th>Sa</th>
-  </tr>
-  <tr>
-    <td>30</td>
-    <td>1</td>
-    <td>2</td>
-    <td>3</td>
-    <td>4</td>
-    <td>5</td>
-    <td>6</td>
-  </tr>
-  <tr>
-    <td>7</td>
-    <td>8</td>
-    <td>9</td>
-    <td>10</td>
-    <td>11</td>
-    <td>12</td>
-    <td>13</td>
-  </tr>
-  <tr>
-    <td>14</td>
-    <td>15</td>
-    <td>16</td>
-    <td>17</td>
-    <td>18</td>
-    <td>19</td>
-    <td>20</td>
-  </tr>
-  <tr>
-    <td>21</td>
-    <td>22</td>
-    <td>23</td>
-    <td>24</td>
-    <td>25</td>
-    <td>26</td>
-    <td>27</td>
-  </tr>
-  <tr>
-    <td>28</td>
-    <td>29</td>
-    <td>30</td>
-    <td>31</td>
-    <td>1</td>
-    <td>2</td>
-    <td>3</td>
-  </tr>
-  </table>`
-  $('main').append(calendar);
+// Appends the calendar to the main 
+function showCalendar() {
+  createCalendar();
+  return $('main').append(calendar);
+}
+
+// Returns today's date
+function today() {
+  return new Date();
+}
+
+// Adds the week days as a header to a table
+function calendarHeader() {
+  return calendar += `
+  <th>Su</th>
+  <th>Mo</th>
+  <th>Tu</th>
+  <th>We</th>
+  <th>Th</th>
+  <th>Fr</th>
+  <th>Sa</th>
+  `;
+}
+
+// Call in with today() to get the first month of today"s month
+function firstOfTheMonth(date) {
+  return new Date(date.getFullYear(), date.getMonth(), 1)
+}
+
+// Main function that calls the other function to fill the calendar variable
+function createCalendar() {
+  var day = new Date().getDay();
+  var month = new Date().getMonth();
+  var year = new Date().getYear();
+
+  calendar += `<table class="calendar">`;
+  calendarHeader();
+  alert(firstOfTheMonth(today()));
+  return calendar += `</table>`;
 }
