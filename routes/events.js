@@ -37,22 +37,25 @@ module.exports = (knex) => {
               time_start: timeStart,
               time_end: timeEnd
             })
-        }).then(() => {
+        })
+        .then(() => {
           return knex('attendees')
             .insert({
               name: req.body.name,
               email: req.body.email
-            }, 'id')
-            .then(([foreignAttendeesId]) => {
-              return knex('times_attendees')
-                .insert({
-                  times_id: knex('times').max('id'),
-                  attendees_id: foreignAttendeesId
-                })
             })
         })
-
-
+        .then(() => {
+          return knex('times').max('id').then(timesid => {
+            return knex('attendees').max('id').then(attendeesid => {
+              return knex('times_attendees')
+                .insert({
+                  times_id: timesid[0]['max'],
+                  attendees_id: attendeesid[0]['max']
+              })
+            })
+          })
+        })
     ])
       .catch(err => {
         console.error(err)
