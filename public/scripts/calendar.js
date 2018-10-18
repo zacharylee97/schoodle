@@ -1,8 +1,8 @@
 "use strict";
 
-var calendar;
+var calendar = "";
 
-// Appends the calendar to the main 
+// Appends the calendar to the main
 function showCalendar() {
   createCalendar();
   return $('main').append(calendar);
