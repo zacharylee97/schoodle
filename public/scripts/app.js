@@ -52,36 +52,31 @@ $(() => {
       url: `/events/${uniqueURL}/info`
     })
     .done((result) => {
-      const title = result[0].title;
-      const description = result[0].description;
-      let eventDetails =
-      `<h1>Event Details</h1>
-      <p>Event title: ${title}</p>
-      <p>Event description: ${description}</p>`;
-      $(".event-details").prepend(eventDetails);
-    })
+      // const title = result[0].title;
+      // const description = result[0].description;
+      // let eventDetails =
+      // `<h1>Event Details</h1>
+      // <p>Event title: ${title}</p>
+      // <p>Event description: ${description}</p>`;
+      // $(".event-details").prepend(eventDetails);
+      // Load timeslots table for event
+      console.log(result);
+    //   const timeslots =
+    //   `<table class="table-bordered">
+    //     <tr>
+    //       <th></th>
+    //       <th>Oct 18 Thu</th>
+    //       <th>Oct 19 Fri</th>
+    //       <th>Oct 20 Sat</th>
+    //     </tr>
+    //     <tr>
+    //       <td>Bob</td>
+    //       <td><input type="checkbox"></td>
+    //       <td><input type="checkbox"></td>
+    //       <td><input type="checkbox"></td>
+    //     </tr>
+    //   </table>`;
+    //   $(".time-slots").append(timeslots);
+    });
   }
-  // Load timeslots table for event
-  $(".time-slots").ready(function() {
-    $.ajax({
-      method: "GET",
-      url: `/events/${uniqueURL}/info`
-    })
-    const timeslots =
-    `<table class="table-bordered">
-      <tr>
-        <th></th>
-        <th>Oct 18 Thu</th>
-        <th>Oct 19 Fri</th>
-        <th>Oct 20 Sat</th>
-      </tr>
-      <tr>
-        <td>Bob</td>
-        <td><input type="checkbox"></td>
-        <td><input type="checkbox"></td>
-        <td><input type="checkbox"></td>
-      </tr>
-    </table>`;
-    $(".time-slots").append(timeslots);
-  })
 });

@@ -75,14 +75,18 @@ module.exports = (knex) => {
   });
   //Retrieve info from database
   router.get("/:unique_url/info", (req, res) => {
-    knex.select('title', 'description').from('events').where('unique_url', req.params.unique_url)
-    .catch(err => {
-      console.error(err)
-    })
-    .then((result) => {
-      res.json(result);
+    return knex.select().from('events')
+      .join('times', 'events.id', 'times.events_id')
+      .join('times_attendees', 'times.id', 'times_attendees.times_id')
+      .join('attendees', 'attendees.id', 'times_attendees.attendees_id')
+      .where('unique_url', req.params.unique_url)
+      .then((result) => {
+        res.json(result);
+      })
+      .catch(err => {
+        console.error(err)
+      });
     });
-  });
 
   return router;
 }
