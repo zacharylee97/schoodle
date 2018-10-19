@@ -16,10 +16,17 @@ $(() => {
   }
 
   $('.calendar').on('click', '.calendarCell', function () {
-    $(this).toggleClass('calendarSelectedCell');
-    let $date = $(this).text();
-    $(this).parents().siblings('.times')
-      .append(`<p class="new-time-slot">${$date}</p>`);
+    if ($(this).hasClass('calendarOutsideMonth')) {
+    } else {
+      $(this).toggleClass('calendarSelectedCell');
+      let $date = $(this).text();
+      if ($('p').hasClass($date)) {
+        $(`.${$date}`).remove();
+      } else {
+      $(this).parents().siblings('.times')
+        .append(`<p class="${$date}">${$date}</p>`);
+      }
+    }
   });
 
   //Post to db on form submission

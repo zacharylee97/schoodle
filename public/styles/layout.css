@@ -47,6 +47,10 @@ body .new-event .calendarCell:hover {
   cursor: pointer;
 }
 
+body .new-event .calendarOutsideMonth:hover {
+  cursor: default;
+}
+
 body .new-event .calendar {
   margin: 0;
   padding: 5px;

@@ -42,6 +42,10 @@ body {
       cursor: pointer;
     }
 
+    .calendarOutsideMonth:hover {
+      cursor: default;
+    }
+
     .calendar {
       margin: 0;
       padding: 5px;
