@@ -7,7 +7,7 @@
   <script type="text/javascript" src="/scripts/calendar.js"></script>
 </head>
 
-<body onload="loadCalendar(0)">
+<body onload="showCalendar(new Date())">
   <main class="new-event">
     <h1>Create A New Event!</h1>
     <form class="new-event-form">
@@ -17,9 +17,9 @@
       <input class="form-control" type="email" name="email" placeholder="Email">
       <div class="calendar">
         <div class="calendarHeader">
-          <i class="fas fa-arrow-left" onclick="loadCalendar(-1)"></i>
+          <i class="fas fa-arrow-left"></i>
           <span class="calendarDate"></span>
-          <i class="fas fa-arrow-right" onclick="loadCalendar(1)"></i>
+          <i class="fas fa-arrow-right"></i>
       </div>
       <div class="calendarTable">
         <table>

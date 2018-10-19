@@ -10,30 +10,6 @@ function showCalendar(date) {
   $('.calendarTable').append(calendar);
 }
 
-const today = new Date();
-let currentMonth = today.getMonth();
-
-//Change calendar month when clicking arrows
-function loadCalendar(int) {
-  if (int === 0) {
-    showCalendar(today);
-  } else if (int === -1) {
-    currentMonth -= 1;
-    today.setMonth(currentMonth);
-    if (currentMonth === -1) {
-      currentMonth = 11;
-    }
-    showCalendar(today);
-  } else if (int === 1) {
-    currentMonth += 1;
-    today.setMonth(currentMonth);
-    if (currentMonth === 12) {
-      currentMonth = 0;
-    }
-    showCalendar(today);
-  }
-}
-
 // Adds the week days as a header to a table
 function calendarHeader() {
   return calendar +=
@@ -73,7 +49,8 @@ function daysInMonth(year, month) {
 function daysBeforeMonth(firstOfMonthDay, date) {
   calendar += `<tr>`;
   for (var i = firstOfMonthDay - 1; i >= 0; i--) {
-    calendar += `<td class="calendarCell calendarOutsideMonth">${daysInMonth(date.getFullYear(), date.getMonth() - 1) - i}</td>`
+    calendar += `<td class="calendarCell calendarOutsideMonth"></td>`
+    //${daysInMonth(date.getFullYear(), date.getMonth() - 1) - i}
   }
 }
 
@@ -92,7 +69,8 @@ function daysDuringMonth(date) {
 // dayOfTheWeek(firstOfTheMonth)
 function daysAfterMonth(lastOfMonthDay) {
   for (var i = 1; i < 7 - dayOfTheWeek(lastOfMonthDay); i++) {
-    calendar += `<td class="calendarCell calendarOutsideMonth">${i}</td>`
+    calendar += `<td class="calendarCell calendarOutsideMonth"></td>`
+    //${i}
   }
   calendar += `</tr>`;
 }

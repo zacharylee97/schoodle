@@ -28,19 +28,98 @@ $(() => {
   }
 
   //Display time slots when date is selected on calendar
+  var selectedDates = [];
+  var months = {
+    'January' : '0',
+    'February' : '1',
+    'March' : '2',
+    'April' : '3',
+    'May' : '4',
+    'June' : '5',
+    'July' : '6',
+    'August' : '7',
+    'September' : '8',
+    'October' : '9',
+    'November' : '10',
+    'December' : '11'
+  }
+
   $('.calendar').on('click', '.calendarCell', function () {
     if ($(this).hasClass('calendarOutsideMonth')) {
     } else {
       $(this).toggleClass('calendarSelectedCell');
-      let $date = $(this).text();
-      if ($('p').hasClass($date)) {
-        $(`.${$date}`).remove();
+      let $day = $(this).text();
+      let monthAndYear = $(this).closest('.calendar').find('.calendarDate').text().split(" ");
+      let $month = monthAndYear[0];
+      let monthNum = months[$month];
+      let $year = monthAndYear[1];
+      let $date = `${$month} ${$day} ${$year}`;
+      let dateClass = `${$year}-${monthNum}-${$day}`
+      if ($('p').hasClass(dateClass)) {
+        $(`.${dateClass}`).remove();
+        selectedDates.splice(selectedDates.indexOf(dateClass), 1);
       } else {
       $(this).parents().siblings('.times')
-        .append(`<p class="${$date}">${$date}</p>`);
+        .append(`<p class=${dateClass}>${$date}</p>`);
       $(".submit").css("display", "block");
+      selectedDates.push(dateClass);
       }
     }
+  });
+
+  //Change month of calendar when clicking arrows
+  const today = new Date();
+  let currentMonth = today.getMonth();
+  let currentYear = today.getFullYear();
+  $('.calendar').on('click', '.fa-arrow-left', function() {
+    currentMonth -= 1;
+    today.setMonth(currentMonth);
+    if (currentMonth === -1) {
+      currentMonth = 11;
+      currentYear -= 1;
+    }
+    //Highlight dates previously selected
+    let dateMatch = [];
+    selectedDates.forEach(function(element) {
+      let date = element.split("-");
+      let year = parseInt(date[0]);
+      let month = parseInt(date[1]);
+      let day = date[2];
+      if (year === currentYear && month === currentMonth) {
+        dateMatch.push(day);
+      }
+    })
+      // dateMatch.forEach(function(day) {
+      //   $('.calendarCell').filter(function() {
+      //     return $(this).text === day;
+      //   }).css('border-color', 'black')
+      // });
+    showCalendar(today);
+  });
+  $('.calendar').on('click', '.fa-arrow-right', function() {
+    currentMonth += 1;
+    today.setMonth(currentMonth);
+    if (currentMonth === 12) {
+      currentMonth = 0;
+      currentYear += 1;
+    }
+    //Highlight dates previously selected
+    let dateMatch = [];
+    selectedDates.forEach(function(element) {
+      let date = element.split("-");
+      let year = parseInt(date[0]);
+      let month = parseInt(date[1]);
+      let day = date[2];
+      if (year === currentYear && month === currentMonth) {
+        dateMatch.push(day);
+      }
+    })
+      // dateMatch.forEach(function(day) {
+      //   $('.calendarCell').filter(function() {
+      //     return $(this).text === day;
+      //   }).css('border-color', 'black')
+      // });
+    showCalendar(today);
   });
 
   //Post to db on form submission
@@ -88,6 +167,7 @@ $(() => {
         const description = result[0].description;
         const eventDetails = `
           <h1>Event Details</h1>
+          <p>Share the event: ${URL}</p>
           <p>Event title: ${title}</p>
           <p>Event description: ${description}</p>`;
 
@@ -123,7 +203,7 @@ $(() => {
             attendee_id: availability.attendees_id
           });
         });
-        // Load timeslots 
+        // Load timeslots
         var eventInfo = `<tr><th></th>`
         times.forEach((time) => {
           eventInfo += `<th>${time.start} <br> ${time.end}</th>`
@@ -146,6 +226,7 @@ $(() => {
           eventInfo += `</tr>`;
         })
         $(".time-slots").append(eventInfo);
+
       });
   }
 });

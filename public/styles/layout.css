@@ -43,6 +43,10 @@ body .new-event {
   text-align: center;
 }
 
+body .new-event .calendar {
+  padding: 10px 0;
+}
+
 body .new-event .calendarCell:hover {
   cursor: pointer;
 }

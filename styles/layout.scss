@@ -38,6 +38,9 @@ body {
     margin: 0 auto;
     text-align: center;
 
+    .calendar {
+      padding: 10px 0;
+    }
     .calendarCell:hover {
       cursor: pointer;
     }
