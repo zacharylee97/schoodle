@@ -51,23 +51,23 @@ body .new-event .calendarOutsideMonth:hover {
   cursor: default;
 }
 
-body .new-event .calendar {
+body .new-event .calendarTable {
   margin: 0;
   padding: 5px;
   float: left;
 }
 
-body .new-event .calendar .calendarCell {
-  border: 1px solid white;
+body .new-event .calendarTable .calendarCell {
+  border: 1px solid transparent;
   padding: 5px;
 }
 
-body .new-event .calendar .calendarSelectedCell {
+body .new-event .calendarTable .calendarSelectedCell {
   border: 1px solid #000;
 }
 
 body .new-event .calendarHeader {
-  margin: 10px 50px;
+  margin: 10px 45px;
   text-align: left;
 }
 
@@ -83,6 +83,11 @@ body .event-details {
 
 .time-slots {
   width: 500px;
+}
+
+.submit {
+  display: none;
+  float: right;
 }
 
 .submit:hover {

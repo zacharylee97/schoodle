@@ -32,6 +32,7 @@ $(() => {
     }
   }
 
+  //Display time slots when date is selected on calendar
   $('.calendar').on('click', '.calendarCell', function () {
     if ($(this).hasClass('calendarOutsideMonth')) {
     } else {
@@ -42,6 +43,7 @@ $(() => {
       } else {
       $(this).parents().siblings('.times')
         .append(`<p class="${$date}">${$date}</p>`);
+      $(".submit").css("display", "block");
       }
     }
   });
@@ -102,14 +104,14 @@ $(() => {
           attendeesInfo.push([element.name, element.email]);
         });
         var attendees = multiDimensionalUnique(attendeesInfo);
-        
+
         //Filter through the events times
         const timesInfo = [];
         result.forEach(function (element) {
           timesInfo.push([element.time_start, element.time_end]);
         });
         var times = multiDimensionalUnique(timesInfo);
-        
+
       //   // Load timeslots table for event
       //   let timeslots =
       //     `<tr>
@@ -133,11 +135,4 @@ $(() => {
       //   });
       });
   }
-
-  $('.calendar').on('click', '.calendarCell', function () {
-    $(this).toggleClass('calendarSelectedCell');
-    // $(this).parents().siblings('.times').text($(this).text());
-    // $(this).parents().siblings('.times').slideToggle();
-
-  });
 });

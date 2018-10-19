@@ -3,11 +3,34 @@
 var calendar = "";
 
 // Appends the calendar to the main
-function showCalendar() {
-  $('.calendar').empty();
+function showCalendar(date) {
+  $('.calendarTable').empty();
   calendar = '';
-  createCalendar();
-  $('.calendar').append(calendar);
+  createCalendar(date);
+  $('.calendarTable').append(calendar);
+}
+
+const today = new Date();
+let currentMonth = today.getMonth();
+
+function loadCalendar(int) {
+  if (int === 0) {
+    showCalendar(today);
+  } else if (int === -1) {
+    currentMonth -= 1;
+    today.setMonth(currentMonth);
+    if (currentMonth === -1) {
+      currentMonth = 11;
+    }
+    showCalendar(today);
+  } else if (int === 1) {
+    currentMonth += 1;
+    today.setMonth(currentMonth);
+    if (currentMonth === 12) {
+      currentMonth = 0;
+    }
+    showCalendar(today);
+  }
 }
 
 // Adds the week days as a header to a table
@@ -74,10 +97,10 @@ function daysAfterMonth(lastOfMonthDay) {
 }
 
 // Main function that calls the other function to fill the calendar variable
-function createCalendar() {
-  var calendarDate = new Date();
+function createCalendar(calendarDate) {
   var months = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  $('.calendarDate').text(`${months[calendarDate.getMonth()]}, ${calendarDate.getDate()}`);
+  $('.calendarDate').text(`${months[calendarDate.getMonth()]} ${calendarDate.getFullYear()}`)
+  .data(calendarDate);
 
   //Start of Calendar
   // calendar += `<table class="calendar">`
