@@ -27,23 +27,6 @@ $(() => {
     }
   }
 
-  //Display time slots when date is selected on calendar
-  var selectedDates = [];
-  var months = {
-    'January' : '0',
-    'February' : '1',
-    'March' : '2',
-    'April' : '3',
-    'May' : '4',
-    'June' : '5',
-    'July' : '6',
-    'August' : '7',
-    'September' : '8',
-    'October' : '9',
-    'November' : '10',
-    'December' : '11'
-  }
-
   function getTimeSlots() {
     let result = "";
     selectedDates.sort(function(a,b) {
@@ -68,7 +51,7 @@ $(() => {
       let year = date[0];
       let month = getMonth(months, date[1]);
       let day = date[2];
-      result += `<p class=${element}>${month} ${day} ${year}</p>`
+      result += `<p class=${element} add-timeslot>${month} ${day} ${year}</p>`
     });
     return result;
   }
@@ -77,7 +60,23 @@ $(() => {
   return Object.keys(months).find(key => months[key] === num);
 }
 
+  var selectedDates = [];
+  var months = {
+    'January' : '0',
+    'February' : '1',
+    'March' : '2',
+    'April' : '3',
+    'May' : '4',
+    'June' : '5',
+    'July' : '6',
+    'August' : '7',
+    'September' : '8',
+    'October' : '9',
+    'November' : '10',
+    'December' : '11'
+  }
 
+  //Display time slots when date is selected on calendar
   $('.calendar').on('click', '.calendarCell', function () {
     if ($(this).hasClass('calendarOutsideMonth')) {
     } else {
