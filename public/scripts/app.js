@@ -58,21 +58,14 @@ $(() => {
           `<h1>Event Details</h1>
       <p>Event title: ${title}</p>
       <p>Event description: ${description}</p>`;
-<<<<<<< HEAD
-      $(".event-details").prepend(eventDetails);
-    })
-  }
-=======
-        $(".event-details").append(eventDetails);
+        $(".event-details").prepend(eventDetails);
       })
-  };
+  }
 
   $('.calendar').on('click', '.calendarCell', function () {
-<<<<<<< HEAD
     $(this).toggleClass('calendarSelectedCell');
-=======
-    $(this).addClass('calendarSelectedCell');
->>>>>>> 79e67f4717736076ddc11d56769e8921c68f8de9
+    // $(this).parents().siblings('.times').text($(this).text());
+    // $(this).parents().siblings('.times').slideToggle();
+
   });
->>>>>>> feature/new-event
 });

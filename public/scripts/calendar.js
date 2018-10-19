@@ -12,7 +12,8 @@ function showCalendar() {
 
 // Adds the week days as a header to a table
 function calendarHeader() {
-  return calendar += `<tr>
+  return calendar += 
+  `<tr>
     <th>Su</th>
     <th>Mo</th>
     <th>Tu</th>
@@ -20,8 +21,7 @@ function calendarHeader() {
     <th>Th</th>
     <th>Fr</th>
     <th>Sa</th>
-  </tr>
-  `;
+  </tr>`;
 }
 
 // Call in with today() to get the first month of today"s month
