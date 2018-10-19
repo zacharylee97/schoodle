@@ -61,7 +61,7 @@ module.exports = (knex) => {
                 .insert({
                   times_id: timesid[0]['max'],
                   attendees_id: attendeesid[0]['max']
-              })
+                })
             })
           })
         })
@@ -73,9 +73,20 @@ module.exports = (knex) => {
         res.json(re);
       })
   });
+
   //Retrieve info from database
   router.get("/:unique_url/info", (req, res) => {
-    return knex.select().from('events')
+    return knex.select([
+      'times_attendees.attendees_id',
+      'times_attendees.times_id',
+      'times.events_id',
+      'times.time_start',
+      'times.time_end',
+      'events.title',
+      'events.description',
+      'attendees.name',
+      'attendees.email',
+    ]).from('events')
       .join('times', 'events.id', 'times.events_id')
       .join('times_attendees', 'times.id', 'times_attendees.times_id')
       .join('attendees', 'attendees.id', 'times_attendees.attendees_id')
@@ -86,7 +97,7 @@ module.exports = (knex) => {
       .catch(err => {
         console.error(err)
       });
-    });
+  });
 
   return router;
 }
