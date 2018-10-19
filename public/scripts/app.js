@@ -19,6 +19,16 @@ $(() => {
     return uniques;
   }
 
+  function formatDate(date) {
+    return [date.getFullYear(),
+    date.getMonth() + 1,
+    date.getDate()].join('-') + ' ' +
+      [date.getHours(),
+      date.getMinutes(),
+      date.getSeconds()].join(':');
+  }
+
+
   function checkForm() {
     if ($('[name=title]').val() && $('[name=description]').val() && $('[name=name]').val() && $('[name=email]').val()) {
       return true;
@@ -67,18 +77,18 @@ $(() => {
 
   var selectedDates = [];
   var months = {
-    'January' : '0',
-    'February' : '1',
-    'March' : '2',
-    'April' : '3',
-    'May' : '4',
-    'June' : '5',
-    'July' : '6',
-    'August' : '7',
-    'September' : '8',
-    'October' : '9',
-    'November' : '10',
-    'December' : '11'
+    'January': '0',
+    'February': '1',
+    'March': '2',
+    'April': '3',
+    'May': '4',
+    'June': '5',
+    'July': '6',
+    'August': '7',
+    'September': '8',
+    'October': '9',
+    'November': '10',
+    'December': '11'
   }
 
   //Display time slots when date is selected on calendar
@@ -110,7 +120,7 @@ $(() => {
   const today = new Date();
   let currentMonth = today.getMonth();
   let currentYear = today.getFullYear();
-  $('.calendar').on('click', '.fa-arrow-left', function() {
+  $('.calendar').on('click', '.fa-arrow-left', function () {
     currentMonth -= 1;
     today.setMonth(currentMonth);
     if (currentMonth === -1) {
@@ -120,7 +130,7 @@ $(() => {
     showCalendar(today);
     //Highlight dates previously selected
     let dateMatch = [];
-    selectedDates.forEach(function(element) {
+    selectedDates.forEach(function (element) {
       let date = element.split("-");
       let year = parseInt(date[0]);
       let month = parseInt(date[1]);
@@ -129,11 +139,11 @@ $(() => {
         dateMatch.push(day);
       }
     })
-    dateMatch.forEach(function(day) {
-        $(`td[data-date=${day}]`).addClass('calendarSelectedCell');
-      });
+    dateMatch.forEach(function (day) {
+      $(`td[data-date=${day}]`).addClass('calendarSelectedCell');
+    });
   });
-  $('.calendar').on('click', '.fa-arrow-right', function() {
+  $('.calendar').on('click', '.fa-arrow-right', function () {
     currentMonth += 1;
     today.setMonth(currentMonth);
     if (currentMonth === 12) {
@@ -143,7 +153,7 @@ $(() => {
     showCalendar(today);
     //Highlight dates previously selected
     let dateMatch = [];
-    selectedDates.forEach(function(element) {
+    selectedDates.forEach(function (element) {
       let date = element.split("-");
       let year = parseInt(date[0]);
       let month = parseInt(date[1]);
@@ -152,9 +162,9 @@ $(() => {
         dateMatch.push(day);
       }
     })
-      dateMatch.forEach(function(day) {
-        $(`td[data-date=${day}]`).addClass('calendarSelectedCell');
-      });
+    dateMatch.forEach(function (day) {
+      $(`td[data-date=${day}]`).addClass('calendarSelectedCell');
+    });
   });
 
   //Post to db on form submission
@@ -239,7 +249,7 @@ $(() => {
         // Load timeslots
         var eventInfo = `<tr><th></th>`
         times.forEach((time) => {
-          eventInfo += `<th>${time.start} <br> ${time.end}</th>`
+          eventInfo += `<th>${formatDate(new Date(time.start))} <br> ${formatDate(new Date(time.end))}</th>`
         })
         eventInfo += `</tr>`;
 
