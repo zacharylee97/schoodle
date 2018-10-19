@@ -19,11 +19,6 @@ $(() => {
     return uniques;
   }
 
-
-  var arr = [[7, 3], [7, 3], [3, 8], [7, 3], [7, 3], [1, 2]];
-
-  multiDimensionalUnique(arr);
-
   function checkForm() {
     if ($('[name=title]').val() && $('[name=description]').val() && $('[name=name]').val() && $('[name=email]').val()) {
       return true;
@@ -33,6 +28,22 @@ $(() => {
   }
 
   //Display time slots when date is selected on calendar
+  var selectedDates = [];
+  var months = {
+    'January' : '0',
+    'February' : '1',
+    'March' : '2',
+    'April' : '3',
+    'May' : '4',
+    'June' : '5',
+    'July' : '6',
+    'August' : '7',
+    'September' : '8',
+    'October' : '9',
+    'November' : '10',
+    'December' : '11'
+  }
+
   $('.calendar').on('click', '.calendarCell', function () {
     if ($(this).hasClass('calendarOutsideMonth')) {
     } else {
@@ -40,29 +51,49 @@ $(() => {
       let $day = $(this).text();
       let monthAndYear = $(this).closest('.calendar').find('.calendarDate').text().split(" ");
       let $month = monthAndYear[0];
+      let monthNum = months[$month];
       let $year = monthAndYear[1];
       let $date = `${$month} ${$day} ${$year}`;
-      let dateClass = `${$month}-${$day}-${$year}`
+      let dateClass = `${$year}-${monthNum}-${$day}`
       if ($('p').hasClass(dateClass)) {
         $(`.${dateClass}`).remove();
+        selectedDates.splice(selectedDates.indexOf(dateClass), 1);
       } else {
       $(this).parents().siblings('.times')
         .append(`<p class=${dateClass}>${$date}</p>`);
       $(".submit").css("display", "block");
+      selectedDates.push(dateClass);
       }
     }
   });
 
+  //Change month of calendar when clicking arrows
   const today = new Date();
   let currentMonth = today.getMonth();
-
-  //Change month of calendar when clicking arrows
+  let currentYear = today.getFullYear();
   $('.calendar').on('click', '.fa-arrow-left', function() {
     currentMonth -= 1;
     today.setMonth(currentMonth);
     if (currentMonth === -1) {
       currentMonth = 11;
+      currentYear -= 1;
     }
+    //Highlight dates previously selected
+    let dateMatch = [];
+    selectedDates.forEach(function(element) {
+      let date = element.split("-");
+      let year = parseInt(date[0]);
+      let month = parseInt(date[1]);
+      let day = date[2];
+      if (year === currentYear && month === currentMonth) {
+        dateMatch.push(day);
+      }
+    })
+      // dateMatch.forEach(function(day) {
+      //   $('.calendarCell').filter(function() {
+      //     return $(this).text === day;
+      //   }).css('border-color', 'black')
+      // });
     showCalendar(today);
   });
   $('.calendar').on('click', '.fa-arrow-right', function() {
@@ -70,7 +101,24 @@ $(() => {
     today.setMonth(currentMonth);
     if (currentMonth === 12) {
       currentMonth = 0;
+      currentYear += 1;
     }
+    //Highlight dates previously selected
+    let dateMatch = [];
+    selectedDates.forEach(function(element) {
+      let date = element.split("-");
+      let year = parseInt(date[0]);
+      let month = parseInt(date[1]);
+      let day = date[2];
+      if (year === currentYear && month === currentMonth) {
+        dateMatch.push(day);
+      }
+    })
+      // dateMatch.forEach(function(day) {
+      //   $('.calendarCell').filter(function() {
+      //     return $(this).text === day;
+      //   }).css('border-color', 'black')
+      // });
     showCalendar(today);
   });
 
@@ -137,28 +185,6 @@ $(() => {
           timesInfo.push([element.time_start, element.time_end]);
         });
         var times = multiDimensionalUnique(timesInfo);
-
-      //   // Load timeslots table for event
-      //   let timeslots =
-      //     `<tr>
-      //     <th></th>
-      //     <th>Oct 18 Thu</th>
-      //     <th>Oct 19 Fri</th>
-      //     <th>Oct 20 Sat</th>
-      //   </tr>
-      // `;
-      //   $(".time-slots").append(timeslots);
-
-      //   attendees.forEach(function (element) {
-      //     let newAttendee =
-      //       `<tr>
-      //   <td>${element}</td>
-      //   <td><input type="checkbox"></td>
-      //   <td><input type="checkbox"></td>
-      //   <td><input type="checkbox"></td>
-      // </tr>`
-      //     $(".time-slots").append(newAttendee);
-      //   });
       });
   }
 });

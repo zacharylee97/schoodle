@@ -49,7 +49,8 @@ function daysInMonth(year, month) {
 function daysBeforeMonth(firstOfMonthDay, date) {
   calendar += `<tr>`;
   for (var i = firstOfMonthDay - 1; i >= 0; i--) {
-    calendar += `<td class="calendarCell calendarOutsideMonth">${daysInMonth(date.getFullYear(), date.getMonth() - 1) - i}</td>`
+    calendar += `<td class="calendarCell calendarOutsideMonth"></td>`
+    //${daysInMonth(date.getFullYear(), date.getMonth() - 1) - i}
   }
 }
 
@@ -68,7 +69,8 @@ function daysDuringMonth(date) {
 // dayOfTheWeek(firstOfTheMonth)
 function daysAfterMonth(lastOfMonthDay) {
   for (var i = 1; i < 7 - dayOfTheWeek(lastOfMonthDay); i++) {
-    calendar += `<td class="calendarCell calendarOutsideMonth">${i}</td>`
+    calendar += `<td class="calendarCell calendarOutsideMonth"></td>`
+    //${i}
   }
   calendar += `</tr>`;
 }
