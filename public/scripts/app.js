@@ -14,6 +14,14 @@ $(() => {
       return false;
     }
   }
+
+  $('.calendar').on('click', '.calendarCell', function () {
+    $(this).toggleClass('calendarSelectedCell');
+    let $date = $(this).text();
+    $(this).parents().siblings('.times')
+      .append(`<p class="new-time-slot">${$date}</p>`);
+  });
+
   //Post to db on form submission
   $('.new-event-form').on('submit', function (e) {
     e.preventDefault();
@@ -92,10 +100,4 @@ $(() => {
       });
     });
   }
-  $('.calendar').on('click', '.calendarCell', function () {
-    $(this).toggleClass('calendarSelectedCell');
-    // $(this).parents().siblings('.times').text($(this).text());
-    // $(this).parents().siblings('.times').slideToggle();
-
-  });
 });

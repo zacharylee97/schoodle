@@ -38,23 +38,38 @@ body {
     margin: 0 auto;
     text-align: center;
 
+    .calendarCell:hover {
+      cursor: pointer;
+    }
+
     .calendar {
-      width: 10px;
-      margin: 0 auto;
+      margin: 0;
+      padding: 5px;
+      float: left;
+
+      .calendarCell {
+        border: 1px solid white;
+        padding: 5px;
+      }
 
       .calendarSelectedCell {
         border: 1px solid #000;
-        border-radius: 50%;
       }
     }
     .calendarHeader {
-      margin: 10px auto;
+      margin: 10px 50px;
+      text-align: left;
     }
   }
   .event-details {
     width: 55%;
     margin: 0 auto;
   }
+}
+
+.times {
+  float: left;
+  margin-left: 50px;
 }
 
 .time-slots {

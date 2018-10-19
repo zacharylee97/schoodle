@@ -43,23 +43,38 @@ body .new-event {
   text-align: center;
 }
 
+body .new-event .calendarCell:hover {
+  cursor: pointer;
+}
+
 body .new-event .calendar {
-  width: 10px;
-  margin: 0 auto;
+  margin: 0;
+  padding: 5px;
+  float: left;
+}
+
+body .new-event .calendar .calendarCell {
+  border: 1px solid white;
+  padding: 5px;
 }
 
 body .new-event .calendar .calendarSelectedCell {
   border: 1px solid #000;
-  border-radius: 50%;
 }
 
 body .new-event .calendarHeader {
-  margin: 10px auto;
+  margin: 10px 50px;
+  text-align: left;
 }
 
 body .event-details {
   width: 55%;
   margin: 0 auto;
+}
+
+.times {
+  float: left;
+  margin-left: 50px;
 }
 
 .time-slots {

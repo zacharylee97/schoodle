@@ -12,7 +12,7 @@ function showCalendar() {
 
 // Adds the week days as a header to a table
 function calendarHeader() {
-  return calendar += 
+  return calendar +=
   `<tr>
     <th>Su</th>
     <th>Mo</th>
