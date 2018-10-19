@@ -19,11 +19,6 @@ $(() => {
     return uniques;
   }
 
-
-  var arr = [[7, 3], [7, 3], [3, 8], [7, 3], [7, 3], [1, 2]];
-
-  multiDimensionalUnique(arr);
-
   function checkForm() {
     if ($('[name=title]').val() && $('[name=description]').val() && $('[name=name]').val() && $('[name=email]').val()) {
       return true;
@@ -84,39 +79,45 @@ $(() => {
 
         //Filter through the attendees
         const attendeesInfo = [];
-        result.forEach(function (element) {
-          attendeesInfo.push([element.name, element.email]);
+        result.forEach(function (attendee) {
+          attendeesInfo.push([attendee.name, attendee.email, attendee.attendees_id]);
         });
         var attendees = multiDimensionalUnique(attendeesInfo);
-        
+
         //Filter through the events times
         const timesInfo = [];
-        result.forEach(function (element) {
-          timesInfo.push([element.time_start, element.time_end]);
+        result.forEach(function (time) {
+          timesInfo.push([time.time_start, time.time_end]);
         });
         var times = multiDimensionalUnique(timesInfo);
-        
-      //   // Load timeslots table for event
-      //   let timeslots =
-      //     `<tr>
-      //     <th></th>
-      //     <th>Oct 18 Thu</th>
-      //     <th>Oct 19 Fri</th>
-      //     <th>Oct 20 Sat</th>
-      //   </tr>
-      // `;
-      //   $(".time-slots").append(timeslots);
 
-      //   attendees.forEach(function (element) {
-      //     let newAttendee =
-      //       `<tr>
-      //   <td>${element}</td>
-      //   <td><input type="checkbox"></td>
-      //   <td><input type="checkbox"></td>
-      //   <td><input type="checkbox"></td>
-      // </tr>`
-      //     $(".time-slots").append(newAttendee);
-      //   });
+        // Takes every connection between times and attendees
+        const timesAttendees = [];
+        result.forEach(function (availability) {
+          timesAttendees.push([availability.times_id, availability.attendees_id]);
+        });
+        // Load timeslots 
+        var eventInfo = `<tr><th></th>`
+        times.forEach((time) => {
+          eventInfo += `<th>${time[0]} <br> ${time[1]}</th>`
+        })
+        eventInfo += `</tr>`;
+
+        // Load every attendees with their availability
+        attendees.forEach((attendee) => {
+          eventInfo += `<tr><td>${attendee[0]} <br> ${attendee[1]}</td>`;
+
+          timesAttendees.forEach((availability) => {
+            eventInfo += `<td>`;
+
+            if (availability[1] == attendee[2]) {
+              eventInfo += `Going!`;
+            }
+            eventInfo += `</td>`;
+          })
+          eventInfo += `</tr>`;
+        })
+        $(".time-slots").append(eventInfo);
       });
   }
 

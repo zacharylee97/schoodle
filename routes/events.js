@@ -74,12 +74,12 @@ module.exports = (knex) => {
       })
   });
 
-  //Retrieve info from database
+  //Retrieve event info from database
   router.get("/:unique_url/info", (req, res) => {
     return knex.select([
-      'times_attendees.attendees_id',
-      'times_attendees.times_id',
-      'times.events_id',
+      'attendees.id as attendees_id',
+      'times.id as times_id',
+      'events.id as events_id',
       'times.time_start',
       'times.time_end',
       'events.title',
