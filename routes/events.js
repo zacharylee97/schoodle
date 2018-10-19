@@ -3,6 +3,8 @@
 const express = require('express');
 const router = express.Router();
 
+const formatDate = require('../formatDate')
+
 module.exports = (knex) => {
   // Create new event page
   router.get("/new", (req, res) => {
@@ -15,22 +17,8 @@ module.exports = (knex) => {
   });
   // Post new event
   router.post("/", (req, res) => {
-    const dateStart = new Date(req.body.time_start);
-    const dateEnd = new Date(req.body.time_end);
-    const timeStart =
-      [dateStart.getMonth() + 1,
-      dateStart.getDate(),
-      dateStart.getFullYear()].join('-') + ' ' +
-      [dateStart.getHours(),
-      dateStart.getMinutes(),
-      dateStart.getSeconds()].join(':');
-    const timeEnd =
-      [dateEnd.getMonth() + 1,
-      dateEnd.getDate(),
-      dateEnd.getFullYear()].join('-') + ' ' +
-      [dateEnd.getHours(),
-      dateEnd.getMinutes(),
-      dateEnd.getSeconds()].join(':');
+    const timeStart = formatDate(new Date(req.body.time_start))
+    const timeEnd = formatDate(new Date(req.body.time_end));
 
     return Promise.all([
       knex('events')
