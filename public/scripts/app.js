@@ -53,6 +53,27 @@ $(() => {
     }
   });
 
+  const today = new Date();
+  let currentMonth = today.getMonth();
+
+  //Change month of calendar when clicking arrows
+  $('.calendar').on('click', '.fa-arrow-left', function() {
+    currentMonth -= 1;
+    today.setMonth(currentMonth);
+    if (currentMonth === -1) {
+      currentMonth = 11;
+    }
+    showCalendar(today);
+  });
+  $('.calendar').on('click', '.fa-arrow-right', function() {
+    currentMonth += 1;
+    today.setMonth(currentMonth);
+    if (currentMonth === 12) {
+      currentMonth = 0;
+    }
+    showCalendar(today);
+  });
+
   //Post to db on form submission
   $('.new-event-form').on('submit', function (e) {
     e.preventDefault();

@@ -10,30 +10,6 @@ function showCalendar(date) {
   $('.calendarTable').append(calendar);
 }
 
-const today = new Date();
-let currentMonth = today.getMonth();
-
-//Change calendar month when clicking arrows
-function loadCalendar(int) {
-  if (int === 0) {
-    showCalendar(today);
-  } else if (int === -1) {
-    currentMonth -= 1;
-    today.setMonth(currentMonth);
-    if (currentMonth === -1) {
-      currentMonth = 11;
-    }
-    showCalendar(today);
-  } else if (int === 1) {
-    currentMonth += 1;
-    today.setMonth(currentMonth);
-    if (currentMonth === 12) {
-      currentMonth = 0;
-    }
-    showCalendar(today);
-  }
-}
-
 // Adds the week days as a header to a table
 function calendarHeader() {
   return calendar +=
