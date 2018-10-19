@@ -232,7 +232,7 @@ $(() => {
           });
         });
 
-        // Load timeslots 
+        // Load timeslots
         var eventInfo = `<tr><th></th>`
         times.forEach((time) => {
           eventInfo += `<th>${time.start} <br> ${time.end}</th>`
