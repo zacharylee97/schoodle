@@ -52,11 +52,12 @@ $(() => {
       let month = getMonth(months, date[1]);
       let day = date[2];
       result +=
-      `<p class=${element}>${month} ${day} ${year}</p>
+      `<div class=${element}>
+      <p class=${element}>${month} ${day} ${year}</p>
+      <button class="${element} add-timeslot">+</button>
       <input class=${element} type='text' placeholder="00:00"></textarea>
       <input class=${element} type='text' placeholder="00:00"></textarea>
-      <button class=${element}>+</button>
-      `
+      </div>`
     });
     return result;
   }
@@ -181,6 +182,15 @@ $(() => {
     } else {
       alert("Please fill in the form!");
     }
+  });
+
+  //Add new timeslot for date
+  $('.times').on('click','.add-timeslot', function (event) {
+    event.preventDefault();
+    let timeslot =
+    `<input type='text' placeholder="00:00"></textarea>
+    <input type='text' placeholder="00:00"></textarea>`
+    $(this).parent().append(timeslot);
   });
 
   //Onclick function for create-new-event button

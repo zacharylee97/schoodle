@@ -94,6 +94,7 @@ body .event-details {
 .times {
   margin-left: 50px;
   float: right;
+  max-width: 200px;
 }
 
 .time-slots {
