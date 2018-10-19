@@ -32,7 +32,6 @@ $(() => {
     }
   }
 
-<<<<<<< HEAD
   $('.calendar').on('click', '.calendarCell', function () {
     if ($(this).hasClass('calendarOutsideMonth')) {
     } else {
@@ -47,8 +46,6 @@ $(() => {
     }
   });
 
-=======
->>>>>>> feature/event
   //Post to db on form submission
   $('.new-event-form').on('submit', function (e) {
     e.preventDefault();
@@ -136,8 +133,6 @@ $(() => {
       //   });
       });
   }
-<<<<<<< HEAD
-=======
 
   $('.calendar').on('click', '.calendarCell', function () {
     $(this).toggleClass('calendarSelectedCell');
@@ -145,5 +140,4 @@ $(() => {
     // $(this).parents().siblings('.times').slideToggle();
 
   });
->>>>>>> feature/event
 });
