@@ -58,7 +58,7 @@ function daysBeforeMonth(firstOfMonthDay, date) {
 function daysDuringMonth(date) {
   var monthLength = daysInMonth(date.getFullYear(), date.getMonth());
   for (var i = 1; i <= monthLength; i++) {
-    calendar += `<td class="calendarCell">${i}</td>`
+    calendar += `<td class="calendarCell" data-date="${i}">${i}</td>`
     if (dayOfTheWeek(new Date(date.getFullYear(), date.getMonth(), i)) === 6) {
       calendar += `</tr><tr>`;
     }

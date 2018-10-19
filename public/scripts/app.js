@@ -78,6 +78,7 @@ $(() => {
       currentMonth = 11;
       currentYear -= 1;
     }
+    showCalendar(today);
     //Highlight dates previously selected
     let dateMatch = [];
     selectedDates.forEach(function(element) {
@@ -89,12 +90,9 @@ $(() => {
         dateMatch.push(day);
       }
     })
-      // dateMatch.forEach(function(day) {
-      //   $('.calendarCell').filter(function() {
-      //     return $(this).text === day;
-      //   }).css('border-color', 'black')
-      // });
-    showCalendar(today);
+    dateMatch.forEach(function(day) {
+        $(`td[data-date=${day}]`).addClass('calendarSelectedCell');
+      });
   });
   $('.calendar').on('click', '.fa-arrow-right', function() {
     currentMonth += 1;
@@ -103,6 +101,7 @@ $(() => {
       currentMonth = 0;
       currentYear += 1;
     }
+    showCalendar(today);
     //Highlight dates previously selected
     let dateMatch = [];
     selectedDates.forEach(function(element) {
@@ -114,12 +113,9 @@ $(() => {
         dateMatch.push(day);
       }
     })
-      // dateMatch.forEach(function(day) {
-      //   $('.calendarCell').filter(function() {
-      //     return $(this).text === day;
-      //   }).css('border-color', 'black')
-      // });
-    showCalendar(today);
+      dateMatch.forEach(function(day) {
+        $(`td[data-date=${day}]`).addClass('calendarSelectedCell');
+      });
   });
 
   //Post to db on form submission
