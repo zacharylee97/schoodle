@@ -61,8 +61,19 @@ body {
       }
     }
     .calendarHeader {
-      margin: 10px 45px;
+      display: flex;
+      justify-content: space-between;
+      max-width: 229px;
+      padding: 5px;
       text-align: left;
+      .fa-arrow-left {
+        margin: 5px 10px;
+      }
+      .calendarDate {
+      }
+      .fa-arrow-right {
+        margin: 5px 10px;
+      }
     }
   }
   .event-details {

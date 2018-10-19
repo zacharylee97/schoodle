@@ -67,8 +67,19 @@ body .new-event .calendarTable .calendarSelectedCell {
 }
 
 body .new-event .calendarHeader {
-  margin: 10px 45px;
+  display: flex;
+  justify-content: space-between;
+  max-width: 229px;
+  padding: 5px;
   text-align: left;
+}
+
+body .new-event .calendarHeader .fa-arrow-left {
+  margin: 5px 10px;
+}
+
+body .new-event .calendarHeader .fa-arrow-right {
+  margin: 5px 10px;
 }
 
 body .event-details {

@@ -13,6 +13,7 @@ function showCalendar(date) {
 const today = new Date();
 let currentMonth = today.getMonth();
 
+//Change calendar month when clicking arrows
 function loadCalendar(int) {
   if (int === 0) {
     showCalendar(today);
