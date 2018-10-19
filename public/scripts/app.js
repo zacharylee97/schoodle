@@ -80,41 +80,53 @@ $(() => {
         //Filter through the attendees
         const attendeesInfo = [];
         result.forEach(function (attendee) {
-          attendeesInfo.push([attendee.name, attendee.email, attendee.attendees_id]);
+          attendeesInfo.push({
+            name: attendee.name,
+            email: attendee.email,
+            id: attendee.attendees_id
+          });
         });
         var attendees = multiDimensionalUnique(attendeesInfo);
 
         //Filter through the events times
         const timesInfo = [];
         result.forEach(function (time) {
-          timesInfo.push([time.time_start, time.time_end]);
+          timesInfo.push({
+            start: time.time_start,
+            end: time.time_end,
+            id: time.times_id
+          });
         });
         var times = multiDimensionalUnique(timesInfo);
 
         // Takes every connection between times and attendees
         const timesAttendees = [];
         result.forEach(function (availability) {
-          timesAttendees.push([availability.times_id, availability.attendees_id]);
+          timesAttendees.push({
+            time_id: availability.times_id,
+            attendee_id: availability.attendees_id
+          });
         });
         // Load timeslots 
         var eventInfo = `<tr><th></th>`
         times.forEach((time) => {
-          eventInfo += `<th>${time[0]} <br> ${time[1]}</th>`
+          eventInfo += `<th>${time.start} <br> ${time.end}</th>`
         })
         eventInfo += `</tr>`;
 
         // Load every attendees with their availability
         attendees.forEach((attendee) => {
-          eventInfo += `<tr><td>${attendee[0]} <br> ${attendee[1]}</td>`;
+          eventInfo += `<tr><td>${attendee.name} <br> ${attendee.email}</td>`;
 
           timesAttendees.forEach((availability) => {
             eventInfo += `<td>`;
-
-            if (availability[1] == attendee[2]) {
+            if (availability.attendee_id == attendee.id) {
               eventInfo += `Going!`;
             }
+
             eventInfo += `</td>`;
           })
+
           eventInfo += `</tr>`;
         })
         $(".time-slots").append(eventInfo);
