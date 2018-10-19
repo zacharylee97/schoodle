@@ -19,8 +19,7 @@ exports.seed = function (knex, Promise) {
         return knex('attendees').insert([
           { name: 'Bob', email: "Bob@bob.com" },
           { name: 'Alice', email: "Ali@Ali.com" },
-          { name: 'Charlie', email: "Cha@Cha.com" },
-          { name: 'Timothy', email: "Tim@tim.com" }
+          { name: 'Charlie', email: "Cha@Cha.com" }
         ])
       })
   ]);
