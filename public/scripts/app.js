@@ -44,6 +44,40 @@ $(() => {
     'December' : '11'
   }
 
+  function getTimeSlots() {
+    let result = "";
+    selectedDates.sort(function(a,b) {
+      let dateA = a.split("-");
+      let dateB = b.split("-");
+      //Check year
+      if (dateA[0] === dateB[0]) {
+        //Check month
+        if (dateA[1] === dateB[1]) {
+          //Check date
+          return dateA[2] - dateB[2];
+        } else {
+          return dateA[1] - dateB[1];
+        }
+      } else {
+        return dateA[0] - dateB[0];
+      }
+    })
+    console.log(selectedDates);
+    selectedDates.forEach(function(element) {
+      let date = element.split("-");
+      let year = date[0];
+      let month = getMonth(months, date[1]);
+      let day = date[2];
+      result += `<p class=${element}>${month} ${day} ${year}</p>`
+    });
+    return result;
+  }
+
+  function getMonth(months, num) {
+  return Object.keys(months).find(key => months[key] === num);
+}
+
+
   $('.calendar').on('click', '.calendarCell', function () {
     if ($(this).hasClass('calendarOutsideMonth')) {
     } else {
@@ -59,10 +93,11 @@ $(() => {
         $(`.${dateClass}`).remove();
         selectedDates.splice(selectedDates.indexOf(dateClass), 1);
       } else {
-      $(this).parents().siblings('.times')
-        .append(`<p class=${dateClass}>${$date}</p>`);
-      $(".submit").css("display", "block");
       selectedDates.push(dateClass);
+      $(this).parents().siblings('.times')
+        .empty()
+        .append(getTimeSlots());
+      $(".submit").css("display", "block");
       }
     }
   });
