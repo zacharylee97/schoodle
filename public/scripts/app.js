@@ -167,6 +167,7 @@ $(() => {
         const description = result[0].description;
         const eventDetails = `
           <h1>Event Details</h1>
+          <p>Share the event: ${URL}</p>
           <p>Event title: ${title}</p>
           <p>Event description: ${description}</p>`;
 
