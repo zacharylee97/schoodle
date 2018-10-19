@@ -60,13 +60,7 @@ $(() => {
       `<h1>Event Details</h1>
       <p>Event title: ${title}</p>
       <p>Event description: ${description}</p>`;
-<<<<<<< HEAD
       $(".event-details").prepend(eventDetails);
-=======
-        $(".event-details").prepend(eventDetails);
-      })
-  }
->>>>>>> 474f1dd6dd80566b0dbb7d3cc5f5eb9431e4ac5e
 
       //Display participants
       const names = [];
@@ -100,11 +94,8 @@ $(() => {
   }
   $('.calendar').on('click', '.calendarCell', function () {
     $(this).toggleClass('calendarSelectedCell');
-<<<<<<< HEAD
-=======
     // $(this).parents().siblings('.times').text($(this).text());
     // $(this).parents().siblings('.times').slideToggle();
 
->>>>>>> 474f1dd6dd80566b0dbb7d3cc5f5eb9431e4ac5e
   });
 });
