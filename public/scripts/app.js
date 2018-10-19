@@ -159,13 +159,10 @@ $(() => {
     })
       .done((result) => {
         //Display event details
-        const title = result[0].title;
-        const description = result[0].description;
         const eventDetails = `
           <h1>Event Details</h1>
-          <p>Share the event: ${URL}</p>
-          <p>Event title: ${title}</p>
-          <p>Event description: ${description}</p>`;
+          <p>Event title: ${result[0].title}</p>
+          <p>Event description: ${result[0].description}</p>`;
 
         $(".event-details").prepend(eventDetails);
 
@@ -199,7 +196,8 @@ $(() => {
             attendee_id: availability.attendees_id
           });
         });
-        // Load timeslots
+
+        // Load timeslots 
         var eventInfo = `<tr><th></th>`
         times.forEach((time) => {
           eventInfo += `<th>${time.start} <br> ${time.end}</th>`
@@ -207,22 +205,22 @@ $(() => {
         eventInfo += `</tr>`;
 
         // Load every attendees with their availability
+        console.log(attendees);
+        console.log(times);
+        console.log(timesAttendees);
         attendees.forEach((attendee) => {
           eventInfo += `<tr><td>${attendee.name} <br> ${attendee.email}</td>`;
 
-          timesAttendees.forEach((availability) => {
-            eventInfo += `<td>`;
-            if (availability.attendee_id == attendee.id) {
-              eventInfo += `Going!`;
-            }
-
-            eventInfo += `</td>`;
+          times.forEach((time) => {
+            eventInfo += `<td data-time-id=${time.id} data-attendee-id=${attendee.id}></td>`
           })
-
           eventInfo += `</tr>`;
         })
         $(".time-slots").append(eventInfo);
 
+        timesAttendees.forEach((availability) => {
+          $(`td[data-time-id = ${availability.time_id}][data-attendee-id = ${availability.attendee_id}]`).addClass('bg-success');
+        })
       });
   }
 });
