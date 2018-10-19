@@ -37,12 +37,17 @@ $(() => {
     if ($(this).hasClass('calendarOutsideMonth')) {
     } else {
       $(this).toggleClass('calendarSelectedCell');
-      let $date = $(this).text();
-      if ($('p').hasClass($date)) {
-        $(`.${$date}`).remove();
+      let $day = $(this).text();
+      let monthAndYear = $(this).closest('.calendar').find('.calendarDate').text().split(" ");
+      let $month = monthAndYear[0];
+      let $year = monthAndYear[1];
+      let $date = `${$month} ${$day} ${$year}`;
+      let dateClass = `${$month}-${$day}-${$year}`
+      if ($('p').hasClass(dateClass)) {
+        $(`.${dateClass}`).remove();
       } else {
       $(this).parents().siblings('.times')
-        .append(`<p class="${$date}">${$date}</p>`);
+        .append(`<p class=${dateClass}>${$date}</p>`);
       $(".submit").css("display", "block");
       }
     }
