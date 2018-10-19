@@ -92,8 +92,8 @@ body .event-details {
 }
 
 .times {
-  float: left;
   margin-left: 50px;
+  float: right;
 }
 
 .time-slots {
@@ -111,4 +111,8 @@ body .event-details {
 
 .fas:hover {
   cursor: pointer;
+}
+
+input {
+  width: 50px;
 }

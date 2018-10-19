@@ -51,7 +51,12 @@ $(() => {
       let year = date[0];
       let month = getMonth(months, date[1]);
       let day = date[2];
-      result += `<p class=${element} add-timeslot>${month} ${day} ${year}</p>`
+      result +=
+      `<p class=${element}>${month} ${day} ${year}</p>
+      <input class=${element} type='text' placeholder="00:00"></textarea>
+      <input class=${element} type='text' placeholder="00:00"></textarea>
+      <button class=${element}>+</button>
+      `
     });
     return result;
   }
@@ -153,7 +158,7 @@ $(() => {
   });
 
   //Post to db on form submission
-  $('.new-event-form').on('submit', function (e) {
+  $('.new-event-form').on('click', '.submit', function (e) {
     e.preventDefault();
     const formValid = checkForm();
     if (formValid) {

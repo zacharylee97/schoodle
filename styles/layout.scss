@@ -86,8 +86,8 @@ body {
 }
 
 .times {
-  float: left;
   margin-left: 50px;
+  float: right;
 }
 
 .time-slots {
@@ -104,4 +104,8 @@ body {
 
 .fas:hover {
   cursor: pointer;
+}
+
+input {
+  width: 50px;
 }
