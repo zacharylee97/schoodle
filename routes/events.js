@@ -16,44 +16,26 @@ module.exports = (knex) => {
     res.render("event");
   });
 
-<<<<<<< HEAD
-function insertTimes(timeslot) {
-  return Promise.all([
-    knex('events').max('id')
-    .then(eventsid => {
-=======
   function insertTimes(timeslot) {
-    return knex('events').max('id').then(eventsid => {
->>>>>>> feature/event
-      return knex('times')
-        .insert({
-          events_id: eventsid[0]['max'],
-          time_start: new Date(timeslot.date + ' ' + timeslot.time_start),
-          time_end: new Date(timeslot.date + ' ' + timeslot.time_end)
-<<<<<<< HEAD
-        }, 'id')
-    }).then(([timesID]) => {
-      return knex('attendees').max('id').then(attendeesid => {
-        return knex('times_attendees')
-          .insert({
-            times_id: timesID,
-            attendees_id: attendeesid[0]['max']
-          })
-=======
-        })
-    })
-      .then(() => {
-        return knex('times').max('id').then(timesid => {
+    return Promise.all([
+      knex('events').max('id')
+        .then(eventsid => {
+          return knex('times')
+            .insert({
+              events_id: eventsid[0]['max'],
+              time_start: new Date(timeslot.date + ' ' + timeslot.time_start),
+              time_end: new Date(timeslot.date + ' ' + timeslot.time_end)
+            }, 'id')
+        }).then(([timesID]) => {
           return knex('attendees').max('id').then(attendeesid => {
             return knex('times_attendees')
               .insert({
-                times_id: timesid[0]['max'],
+                times_id: timesID,
                 attendees_id: attendeesid[0]['max']
               })
           })
         })
->>>>>>> feature/event
-      })
+    ]);
   }
 
   function modifyAvailability(availability) {
@@ -83,15 +65,10 @@ function insertTimes(timeslot) {
           })
       }
     })
-<<<<<<< HEAD
-  ]);
-}
-=======
       .catch((err) => {
         console.error(err);
       })
   }
->>>>>>> feature/event
 
   // Modify a specific event's attendees and their availability
   router.post("/:unique_url", (req, res) => {
@@ -102,7 +79,7 @@ function insertTimes(timeslot) {
     ]).then(() => {
       res.redirect(`${req.body.unique_url}`)
     })
-  });
+  })
 
   // Post new event
   router.post("/", (req, res) => {
@@ -115,19 +92,11 @@ function insertTimes(timeslot) {
           unique_url: req.body.unique_url
         })
         .then(() => {
-<<<<<<< HEAD
-            return knex('attendees')
-              .insert({
-                name: req.body.name,
-                email: req.body.email
-              })
-=======
           return knex('attendees')
             .insert({
               name: req.body.name,
               email: req.body.email
             })
->>>>>>> feature/event
         })
         .then(() => {
           times.forEach(function (timeslot) {
