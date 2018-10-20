@@ -100,6 +100,10 @@ body .event-details {
   width: 500px;
 }
 
+.add-timeslot {
+  width: 100px;
+}
+
 .submit {
   display: none;
   float: right;
