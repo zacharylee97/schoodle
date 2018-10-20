@@ -16,24 +16,29 @@ module.exports = (knex) => {
     res.render("event");
   });
 
-  function insertTimes(timeslot) {
-    return knex('events').max('id').then(eventsid => {
-    return knex('times')
-      .insert({
-        events_id: eventsid[0]['max'],
-        time_start: new Date(timeslot.date + ' ' + timeslot.time_start),
-        time_end: new Date(timeslot.date + ' ' + timeslot.time_end)
-      })
-    })
-    .then(() => {
-      return knex('times').max('id').then(timesid => {
-        return knex('attendees').max('id').then(attendeesid => {
-          return knex('times_attendees')
-            .insert({
-              times_id: timesid[0]['max'],
-              attendees_id: attendeesid[0]['max']
-            })
-        })
+
+async function insert() {
+
+}
+
+
+function insertTimes(timeslot) {
+  return Promise.all([
+    knex('events').max('id')
+    .then(eventsid => {
+      return knex('times')
+        .insert({
+          events_id: eventsid[0]['max'],
+          time_start: new Date(timeslot.date + ' ' + timeslot.time_start),
+          time_end: new Date(timeslot.date + ' ' + timeslot.time_end)
+        }, 'id')
+    }).then(([timesID]) => {
+      return knex('attendees').max('id').then(attendeesid => {
+        return knex('times_attendees')
+          .insert({
+            times_id: timesID,
+            attendees_id: attendeesid[0]['max']
+          })
       })
     })
   }
@@ -59,12 +64,12 @@ module.exports = (knex) => {
                 name: req.body.name,
                 email: req.body.email
               })
-          })
+        })
         .then(() => {
           times.forEach(function (timeslot) {
             insertTimes(timeslot);
-            })
           })
+        })
     ])
       .catch(err => {
         console.error(err)
@@ -101,3 +106,5 @@ module.exports = (knex) => {
 
   return router;
 }
+
+

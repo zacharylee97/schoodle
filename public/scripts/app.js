@@ -57,7 +57,10 @@ $(() => {
         return dateA[0] - dateB[0];
       }
     })
+<<<<<<< HEAD
 
+=======
+>>>>>>> feature/new-event
     selectedDates.forEach(function (element) {
       let date = element.split("-");
       let year = date[0];
@@ -242,7 +245,6 @@ $(() => {
           <h1>Event Details</h1>
           <p>Event title: ${result[0].title}</p>
           <p>Event description: ${result[0].description}</p>`;
-
         $(".event-details").prepend(eventDetails);
 
         //Filter through the attendees
