@@ -16,12 +16,6 @@ module.exports = (knex) => {
     res.render("event");
   });
 
-
-async function insert() {
-
-}
-
-
 function insertTimes(timeslot) {
   return Promise.all([
     knex('events').max('id')
