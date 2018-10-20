@@ -18,7 +18,6 @@ module.exports = (knex) => {
   // Post new event
   router.post("/", (req, res) => {
     const times = req.body.times;
-    
     return Promise.all([
       knex('events')
         .insert({
