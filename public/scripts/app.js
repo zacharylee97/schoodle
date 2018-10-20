@@ -208,9 +208,6 @@ $(() => {
         window.location.href = `/events/${uniqueUrl}`;
       });
     } else {
-      timeSlots.forEach(function(element) {
-        console.log(element.val);
-      })
       alert("Please fill in the form!");
     }
   });

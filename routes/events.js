@@ -18,7 +18,6 @@ module.exports = (knex) => {
   // Post new event
   router.post("/", (req, res) => {
     const times = req.body.times;
-
     return Promise.all([
       knex('events')
         .insert({
@@ -33,8 +32,7 @@ module.exports = (knex) => {
                 events_id: foreignEventsId,
                 time_start: new Date(timeslot.date + ' ' + timeslot.time_start),
                 time_end: new Date(timeslot.date + ' ' + timeslot.time_end)
-              })
-              .then(() => {
+              }).then(() => {
                 return knex('attendees')
                   .insert({
                     name: req.body.name,
@@ -55,6 +53,7 @@ module.exports = (knex) => {
           })
 
         })
+
     ])
       .catch(err => {
         console.error(err)
