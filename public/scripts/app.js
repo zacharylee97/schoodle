@@ -309,7 +309,7 @@ $(() => {
       });
   }
 
-  // Add new attendees to the event page and to the db
+  // Add new attendees to the event page
   $('.event-details').on('click', '.fa-plus', function (e) {
     $(this).parent('.addAttendee').remove();
     let eventInfo = `<tr><td><input type="text" name="newName" placeholder="Name">
@@ -325,24 +325,26 @@ $(() => {
     $(".time-slots").append(eventInfo);
   });
 
+  // Make the selected user editable and change the icon to a user check
   $('.event-details').on('click', '.fa-user-edit', function (e) {
     $(this).toggleClass('fa-user-edit fa-user-check');
     console.log($(this).parent().siblings().addClass(`newAvailability`));
   })
 
+  // When you click on an editable table cell (either through new user or edit user) toggle the classes
   $('.event-details').on('click', '.newAvailability', function (e) {
     e.preventDefault();
     $(this).toggleClass('notAvailable available');
   });
 
+
   $('.event-details').on('click', '.fa-user-plus', function (e) {
     e.preventDefault();
-    // Add a new attendee to the db and refresh the page
-    // Also check if the email is already in the db //!!! LAST !!!
+    // Add a new attendee to the db and refresh the page with times, attendees, times_attendees tables
   });
 
   $('.event-details').on('click', '.fa-user-check', function (e) {
     e.preventDefault();
-    // Edit/Update an attendee's availability in the db and refresh the page
+    // Only modify times_attendees table
   })
 });
