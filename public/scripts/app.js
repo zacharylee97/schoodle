@@ -281,7 +281,6 @@ $(() => {
           var date = time.start.slice(0,10);
           var time_start = time.start.slice(11,16);
           var time_end = time.end.slice(11,16);
-          console.log(date, time_start, time_end);
 
           eventInfo += `<th class="timeslot"> ${date} <br> ${time_start} - ${time_end}</th>`
         })
@@ -336,7 +335,7 @@ $(() => {
     $(this).toggleClass('notAvailable available');
   });
 
-
+  //Edit availability of attendee
   $('.event-details').on('click', '.fa-user-check', function (e) {
     e.preventDefault();
     const URL = window.location.href;
@@ -364,11 +363,35 @@ $(() => {
       window.location.href = `${uniqueURL}`;
     });
 
-    // Add a new attendee to the db and refresh the page with times, attendees, times_attendees tables
   });
 
-  $('.event-details').on('click', '.fa-user-check', function (e) {
+  // Add a new attendee to the db and refresh the page with times, attendees, times_attendees tables
+  $('.event-details').on('click', '.fa-user-plus', function (e) {
     e.preventDefault();
-    // Only modify times_attendees table
+    const URL = window.location.href;
+    const uniqueURL = URL.slice(-12);
+    const $name = $(this).siblings('input[name=newName]').val();
+    const $email = $(this).siblings('input[name=newEmail]').val();
+    const timesAttendees = [];
+
+    $availability.each(function () {
+      timesAttendees.push({
+        time_id: $(this).attr('data-time-id'),
+        attendee_id: $(this).attr('data-attendee-id'),
+        going: $(this).hasClass('available')
+      });
+    });
+    $.ajax({
+      method: "POST",
+      url: `/events/${uniqueURL}/new`,
+      data: {
+        unique_url: uniqueURL,
+        name: $name,
+        email: $email,
+        times_attendees_going: timesAttendees
+      }
+    }).done(() => {
+      window.location.href = `${uniqueURL}`;
+    });
   })
 });

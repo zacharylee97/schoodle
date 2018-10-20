@@ -70,6 +70,17 @@ module.exports = (knex) => {
       })
   }
 
+  //Add an attendee to specific event
+   router.post("/:unique_url/new", (req, res) => {
+    return Promise.all([
+      req.body.times_attendees_going.forEach((availability) => {
+        modifyAvailability(availability);
+      })
+    ]).then(() => {
+      res.redirect(`${req.body.unique_url}`)
+    })
+  })
+
   // Modify a specific event's attendees and their availability
   router.post("/:unique_url", (req, res) => {
     return Promise.all([
