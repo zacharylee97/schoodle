@@ -278,7 +278,12 @@ $(() => {
         // Load timeslots
         var eventInfo = `<tr><th></th>`
         times.forEach((time) => {
-          eventInfo += `<th class="timeslot">${formatDate(new Date(time.start))} <br> ${formatDate(new Date(time.end))}</th>`
+          var date = time.start.slice(0,10);
+          var time_start = time.start.slice(11,16);
+          var time_end = time.end.slice(11,16);
+          console.log(date, time_start, time_end);
+
+          eventInfo += `<th class="timeslot"> ${date} <br> ${time_start} - ${time_end}</th>`
         })
         eventInfo += `</tr>`;
 
