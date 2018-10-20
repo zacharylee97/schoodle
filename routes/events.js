@@ -15,6 +15,28 @@ module.exports = (knex) => {
   router.get("/:unique_url", (req, res) => {
     res.render("event");
   });
+
+  function insertTimes(timeslot) {
+    return knex('events').max('id').then(eventsid => {
+    return knex('times')
+      .insert({
+        events_id: eventsid[0]['max'],
+        time_start: new Date(timeslot.date + ' ' + timeslot.time_start),
+        time_end: new Date(timeslot.date + ' ' + timeslot.time_end)
+      })
+    })
+    .then(() => {
+      return knex('times').max('id').then(timesid => {
+        return knex('attendees').max('id').then(attendeesid => {
+          return knex('times_attendees')
+            .insert({
+              times_id: timesid[0]['max'],
+              attendees_id: attendeesid[0]['max']
+            })
+        })
+      })
+    })
+  }
   // Post new event
   router.post("/", (req, res) => {
     const times = req.body.times;
@@ -24,36 +46,19 @@ module.exports = (knex) => {
           title: req.body.title,
           description: req.body.description,
           unique_url: req.body.unique_url
-        }, 'id')
-        .then(([foreignEventsId]) => {
-          return times.forEach((timeslot) => {
-            return knex('times')
+        })
+        .then(() => {
+            return knex('attendees')
               .insert({
-                events_id: foreignEventsId,
-                time_start: new Date(timeslot.date + ' ' + timeslot.time_start),
-                time_end: new Date(timeslot.date + ' ' + timeslot.time_end)
-              }).then(() => {
-                return knex('attendees')
-                  .insert({
-                    name: req.body.name,
-                    email: req.body.email
-                  })
-              })
-              .then(() => {
-                return knex('times').max('id').then(timesid => {
-                  return knex('attendees').max('id').then(attendeesid => {
-                    return knex('times_attendees')
-                      .insert({
-                        times_id: timesid[0]['max'],
-                        attendees_id: attendeesid[0]['max']
-                      })
-                  })
-                })
+                name: req.body.name,
+                email: req.body.email
               })
           })
-
-        })
-
+        .then(() => {
+          times.forEach(function (timeslot) {
+            insertTimes(timeslot);
+            })
+          })
     ])
       .catch(err => {
         console.error(err)
