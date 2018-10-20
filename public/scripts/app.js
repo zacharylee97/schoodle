@@ -271,17 +271,17 @@ $(() => {
         result.forEach(function (availability) {
           timesAttendees.push({
             time_id: availability.times_id,
-            attendee_id: availability.attendees_id
+            attendee_id: availability.attendees_id,
+            going: availability.going
           });
         });
 
         // Load timeslots
         var eventInfo = `<tr><th></th>`
         times.forEach((time) => {
-          var date = time.start.slice(0,10);
-          var time_start = time.start.slice(11,16);
-          var time_end = time.end.slice(11,16);
-          console.log(date, time_start, time_end);
+          var date = time.start.slice(0, 10);
+          var time_start = time.start.slice(11, 16);
+          var time_end = time.end.slice(11, 16);
 
           eventInfo += `<th class="timeslot"> ${date} <br> ${time_start} - ${time_end}</th>`
         })
@@ -303,8 +303,12 @@ $(() => {
         eventInfo = '';
 
         timesAttendees.forEach((availability) => {
-          $(`td[data-time-id = ${availability.time_id}][data-attendee-id = ${availability.attendee_id}]`).toggleClass('notAvailable available');
-        })
+          let = $cell = $(`td[data-time-id = ${availability.time_id}][data-attendee-id = ${availability.attendee_id}]`);
+          $cell.attr('data-going', availability.going);
+          if ($cell.attr('data-going') == 'true') {
+            $cell.toggleClass('notAvailable available')
+          }
+        });
       });
   }
 
@@ -334,6 +338,12 @@ $(() => {
   $('.event-details').on('click', '.newAvailability', function (e) {
     e.preventDefault();
     $(this).toggleClass('notAvailable available');
+    if ($(this).attr('data-going') == 'true') {
+      $(this).attr('data-going', 'false');
+    }
+    else {
+      $(this).attr('data-going', 'true');
+    }
   });
 
 
@@ -347,9 +357,9 @@ $(() => {
 
     $availability.each(function () {
       timesAttendees.push({
-        time_id: $(this).attr('data-time-id'),
-        attendee_id: $(this).attr('data-attendee-id'),
-        going: $(this).hasClass('available')
+        times_id: $(this).attr('data-time-id'),
+        attendees_id: $(this).attr('data-attendee-id'),
+        going: $(this).attr('data-going')
       });
     });
 
@@ -358,7 +368,7 @@ $(() => {
       url: `/events/${uniqueURL}`,
       data: {
         unique_url: uniqueURL,
-        times_attendees_going: timesAttendees
+        times_attendees: timesAttendees
       }
     }).done(() => {
       window.location.href = `${uniqueURL}`;
