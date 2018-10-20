@@ -18,11 +18,6 @@ module.exports = (knex) => {
   // Post new event
   router.post("/", (req, res) => {
     const times = req.body.times;
-    times.forEach(function(timeslot) {
-
-    })
-    const timeStart = formatDate(new Date());
-    const timeEnd = formatDate(new Date());
 
     return Promise.all([
       knex('events')
@@ -32,30 +27,33 @@ module.exports = (knex) => {
           unique_url: req.body.unique_url
         }, 'id')
         .then(([foreignEventsId]) => {
-          return knex('times')
-            .insert({
-              events_id: foreignEventsId,
-              time_start: timeStart,
-              time_end: timeEnd
-            })
-        })
-        .then(() => {
-          return knex('attendees')
-            .insert({
-              name: req.body.name,
-              email: req.body.email
-            })
-        })
-        .then(() => {
-          return knex('times').max('id').then(timesid => {
-            return knex('attendees').max('id').then(attendeesid => {
-              return knex('times_attendees')
-                .insert({
-                  times_id: timesid[0]['max'],
-                  attendees_id: attendeesid[0]['max']
+          return times.forEach((timeslot) => {
+            return knex('times')
+              .insert({
+                events_id: foreignEventsId,
+                time_start: new Date(timeslot.date + ' ' + timeslot.time_start),
+                time_end: new Date(timeslot.date + ' ' + timeslot.time_end)
+              })
+              .then(() => {
+                return knex('attendees')
+                  .insert({
+                    name: req.body.name,
+                    email: req.body.email
+                  })
+              })
+              .then(() => {
+                return knex('times').max('id').then(timesid => {
+                  return knex('attendees').max('id').then(attendeesid => {
+                    return knex('times_attendees')
+                      .insert({
+                        times_id: timesid[0]['max'],
+                        attendees_id: attendeesid[0]['max']
+                      })
+                  })
                 })
-            })
+              })
           })
+
         })
     ])
       .catch(err => {
