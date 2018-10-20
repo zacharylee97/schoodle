@@ -15,6 +15,12 @@ module.exports = (knex) => {
   router.get("/:unique_url", (req, res) => {
     res.render("event");
   });
+
+  // Modify a specific event's attendees and their availability
+  router.post("/:unique_url", (req, res) => {
+    res.json(req.body);
+  });
+
   // Post new event
   router.post("/", (req, res) => {
     const times = req.body.times;

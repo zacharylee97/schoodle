@@ -57,14 +57,14 @@ $(() => {
         return dateA[0] - dateB[0];
       }
     })
-    console.log(selectedDates);
+
     selectedDates.forEach(function (element) {
       let date = element.split("-");
       let year = date[0];
       let month = getMonth(months, date[1]);
       let day = date[2];
       result +=
-      `<div class=${element}>
+        `<div class=${element}>
         <p class=timeslot-header>${month} ${day} ${year}</p>
         <div class=time-input data-date=${element}>
           <span class='timeslot-pair'>
@@ -182,7 +182,7 @@ $(() => {
     if (formValid) {
       let uniqueUrl = generateRandomString(12);
       let times = [];
-      $('.time-input').children('.timeslot-pair').each(function(index, element) {
+      $('.time-input').children('.timeslot-pair').each(function (index, element) {
         let date = $(this).parent().data('date');
         let time_start = $(this).children("input[data-time='start']").val();
         let time_end = $(this).children("input[data-time='end']").val();
@@ -191,7 +191,6 @@ $(() => {
           time_start: time_start,
           time_end: time_end
         });
-        console.log(times);
       });
       $.ajax({
         method: "POST",
@@ -208,18 +207,15 @@ $(() => {
         window.location.href = `/events/${uniqueUrl}`;
       });
     } else {
-      timeSlots.forEach(function(element) {
-        console.log(element.val);
-      })
       alert("Please fill in the form!");
     }
   });
 
   //Add new timeslot for date
-  $('.times').on('click','.add-timeslot', function (event) {
+  $('.times').on('click', '.add-timeslot', function (event) {
     event.preventDefault();
     let timeslot =
-    `<span class='timeslot-pair'>
+      `<span class='timeslot-pair'>
       <input class='add-time' data-time=start type='text' placeholder="00:00"></textarea>
       <input class='add-time' data-time=end type='text' placeholder="00:00"></textarea>
     </span>
@@ -292,7 +288,7 @@ $(() => {
           eventInfo += `<tr><td data-attendee-id=${attendee.id}>${attendee.name} <br> ${attendee.email}<i class="fas fa-user-edit"></i></td>`;
 
           times.forEach((time) => {
-            eventInfo += `<td class="notAvailable" data-time-id=${time.id} data-attendee-id=${attendee.id}></td>`
+            eventInfo += `<td class="notAvailable availability" data-time-id=${time.id} data-attendee-id=${attendee.id}></td>`
           })
           eventInfo += `</tr>`;
         })
@@ -316,7 +312,7 @@ $(() => {
         <i class="fas fa-user-plus"></i></td>`;
 
     times.forEach((time) => {
-      eventInfo += `<td class="newAvailability notAvailable" data-time-id="${time.id}"></td>`
+      eventInfo += `<td class="newAvailability notAvailable availability" data-time-id="${time.id}"></td>`
     });
 
     eventInfo += `</tr><td colspan="3" class="addAttendee"><i class="fas fa-plus"></i></td>`;
@@ -327,7 +323,7 @@ $(() => {
   // Make the selected user editable and change the icon to a user check
   $('.event-details').on('click', '.fa-user-edit', function (e) {
     $(this).toggleClass('fa-user-edit fa-user-check');
-    console.log($(this).parent().siblings().addClass(`newAvailability`));
+    $(this).parent().siblings().addClass(`newAvailability`);
   })
 
   // When you click on an editable table cell (either through new user or edit user) toggle the classes
@@ -337,8 +333,34 @@ $(() => {
   });
 
 
-  $('.event-details').on('click', '.fa-user-plus', function (e) {
+  $('.event-details').on('click', '.fa-user-check', function (e) {
     e.preventDefault();
+    const URL = window.location.href;
+    const uniqueURL = URL.slice(-12);
+    const $availability = $(this).parent().siblings('.availability');
+
+    const timesAttendees = [];
+
+    $availability.each(function () {
+      alert(`Times_id: ${$(this).attr('data-time-id')} Attendees_id: ${$(this).attr('data-attendee-id')} Available: ${$(this).attr('class') == 'availability available newAvailability'}`);
+      timesAttendees.push({
+        time_id: $(this).attr('data-time-id'),
+        attendee_id: $(this).attr('data-attendee-id'),
+        going: $(this).attr('class') == 'availability available newAvailability'
+      });
+    });
+
+    $.ajax({
+      method: "POST",
+      url: `/events/${uniqueURL}`,
+      data: {
+        unique_url: uniqueURL,
+        times_attendees_going: timesAttendees
+      }
+    }).done(() => {
+      window.location.href = `${uniqueURL}`;
+    });
+
     // Add a new attendee to the db and refresh the page with times, attendees, times_attendees tables
   });
 
