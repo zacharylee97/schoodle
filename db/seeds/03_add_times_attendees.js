@@ -8,11 +8,17 @@ exports.seed = function (knex, Promise) {
         { times_id: 1, attendees_id: 2 },
         { times_id: 1, attendees_id: 3 },
         { times_id: 2, attendees_id: 1 },
+        { times_id: 2, attendees_id: 2, going: false },
+        { times_id: 2, attendees_id: 3, going: false },
         { times_id: 3, attendees_id: 1 },
         { times_id: 3, attendees_id: 3 },
         { times_id: 4, attendees_id: 1 },
         { times_id: 4, attendees_id: 2 },
-        { times_id: 4, attendees_id: 3 }
+        { times_id: 4, attendees_id: 3 },
+        { times_id: 5, attendees_id: 1, going: false },
+        { times_id: 5, attendees_id: 2, going: false },
+        { times_id: 5, attendees_id: 3, going: false },
+
       ])
     })
 };
