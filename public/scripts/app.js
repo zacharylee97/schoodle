@@ -187,9 +187,9 @@ $(() => {
         let time_start = $(this).children("input[data-time='start']").val();
         let time_end = $(this).children("input[data-time='end']").val();
         times.push({
-          'date': date,
-          'time_start': time_start,
-          'time_end': time_end
+          date: date,
+          time_start: time_start,
+          time_end: time_end
         });
         console.log(times);
       });
@@ -201,8 +201,7 @@ $(() => {
           description: $('[name=description]').val(),
           name: $('[name=name]').val(),
           email: $('[name=email]').val(),
-          time_start: new Date(),
-          time_end: new Date(),
+          times: times;
           unique_url: uniqueUrl
         }
       }).done(() => {

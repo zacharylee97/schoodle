@@ -17,8 +17,12 @@ module.exports = (knex) => {
   });
   // Post new event
   router.post("/", (req, res) => {
-    const timeStart = formatDate(new Date(req.body.time_start))
-    const timeEnd = formatDate(new Date(req.body.time_end));
+    const times = req.body.times;
+    times.forEach(function(timeslot) {
+
+    })
+    const timeStart = formatDate(new Date());
+    const timeEnd = formatDate(new Date());
 
     return Promise.all([
       knex('events')
