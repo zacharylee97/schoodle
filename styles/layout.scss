@@ -70,7 +70,7 @@ body {
     }
     .times {
       margin-left: 50px;
-      float: right;
+      float: left;
 
       .add-time {
         width: 50px;
@@ -85,6 +85,7 @@ body {
       .submit {
         display: none;
         float: right;
+        margin: 10px;
       }
       .submit:hover {
         cursor: pointer;

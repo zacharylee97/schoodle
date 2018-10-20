@@ -88,7 +88,7 @@ body .new-event .calendarHeader .fa-arrow-right {
 
 body .new-event .times {
   margin-left: 50px;
-  float: right;
+  float: left;
 }
 
 body .new-event .times .add-time {
@@ -106,6 +106,7 @@ body .new-event .times .add-timeslot:hover {
 body .new-event .submit {
   display: none;
   float: right;
+  margin: 10px;
 }
 
 body .new-event .submit:hover {
