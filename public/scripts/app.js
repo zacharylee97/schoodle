@@ -342,11 +342,10 @@ $(() => {
     const timesAttendees = [];
 
     $availability.each(function () {
-      alert(`Times_id: ${$(this).attr('data-time-id')} Attendees_id: ${$(this).attr('data-attendee-id')} Available: ${$(this).attr('class') == 'availability available newAvailability'}`);
       timesAttendees.push({
         time_id: $(this).attr('data-time-id'),
         attendee_id: $(this).attr('data-attendee-id'),
-        going: $(this).attr('class') == 'availability available newAvailability'
+        going: $(this).hasClass('available')
       });
     });
 

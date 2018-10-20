@@ -18,29 +18,67 @@ module.exports = (knex) => {
 
   function insertTimes(timeslot) {
     return knex('events').max('id').then(eventsid => {
-    return knex('times')
-      .insert({
-        events_id: eventsid[0]['max'],
-        time_start: new Date(timeslot.date + ' ' + timeslot.time_start),
-        time_end: new Date(timeslot.date + ' ' + timeslot.time_end)
-      })
+      return knex('times')
+        .insert({
+          events_id: eventsid[0]['max'],
+          time_start: new Date(timeslot.date + ' ' + timeslot.time_start),
+          time_end: new Date(timeslot.date + ' ' + timeslot.time_end)
+        })
     })
-    .then(() => {
-      return knex('times').max('id').then(timesid => {
-        return knex('attendees').max('id').then(attendeesid => {
-          return knex('times_attendees')
-            .insert({
-              times_id: timesid[0]['max'],
-              attendees_id: attendeesid[0]['max']
-            })
+      .then(() => {
+        return knex('times').max('id').then(timesid => {
+          return knex('attendees').max('id').then(attendeesid => {
+            return knex('times_attendees')
+              .insert({
+                times_id: timesid[0]['max'],
+                attendees_id: attendeesid[0]['max']
+              })
+          })
         })
       })
+  }
+
+  function modifyAvailability(availability) {
+    return knex('times_attendees').where({
+      times_id: availability.time_id,
+      attendees_id: availability.attendee_id
+    }).then((res) => {
+      if (availability.going == 'true' && !res[0]) {
+        console.log(`Added to db! Going: ${availability.going}, times_id: ${availability.time_id}, attendees_id: ${availability.attendee_id}`);
+        knex('times_attendees')
+          .insert({
+            times_id: availability.time_id,
+            attendees_id: availability.attendee_id
+          }).then(() => {
+            console.log(`Success for adding`);
+          })
+      }
+      if (availability.going == 'false' && !!res[0]) {
+        console.log(`Removed from db! Going: ${availability.going}, times_id: ${availability.time_id}, attendees_id: ${availability.attendee_id}`);
+        knex('times_attendees')
+          .where({
+            times_id: availability.time_id,
+            attendees_id: availability.attendee_id
+          })
+          .del().then(() => {
+            console.log(`Success for deleting`);
+          })
+      }
     })
+      .catch((err) => {
+        console.error(err);
+      })
   }
 
   // Modify a specific event's attendees and their availability
   router.post("/:unique_url", (req, res) => {
-    res.json(req.body);
+    return Promise.all([
+      req.body.times_attendees_going.forEach((availability) => {
+        modifyAvailability(availability);
+      })
+    ]).then(() => {
+      res.redirect(`${req.body.unique_url}`)
+    })
   });
 
   // Post new event
@@ -54,17 +92,17 @@ module.exports = (knex) => {
           unique_url: req.body.unique_url
         })
         .then(() => {
-            return knex('attendees')
-              .insert({
-                name: req.body.name,
-                email: req.body.email
-              })
-          })
+          return knex('attendees')
+            .insert({
+              name: req.body.name,
+              email: req.body.email
+            })
+        })
         .then(() => {
           times.forEach(function (timeslot) {
             insertTimes(timeslot);
-            })
           })
+        })
     ])
       .catch(err => {
         console.error(err)
