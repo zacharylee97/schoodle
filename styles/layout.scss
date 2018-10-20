@@ -72,12 +72,13 @@ body {
       margin-left: 50px;
       float: left;
 
+      .timeslot-header {
+        margin: 0;
+      }
+
       .add-time {
         width: 50px;
       }
-      .add-timeslot {
-          width: 100px;
-        }
       .add-timeslot:hover{
         cursor: pointer;
       }

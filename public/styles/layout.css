@@ -91,12 +91,12 @@ body .new-event .times {
   float: left;
 }
 
-body .new-event .times .add-time {
-  width: 50px;
+body .new-event .times .timeslot-header {
+  margin: 0;
 }
 
-body .new-event .times .add-timeslot {
-  width: 100px;
+body .new-event .times .add-time {
+  width: 50px;
 }
 
 body .new-event .times .add-timeslot:hover {
