@@ -68,8 +68,8 @@ $(() => {
         <p class=timeslot-header>${month} ${day} ${year}</p>
         <div class=time-input data-date=${element}>
           <span class='timeslot-pair'>
-            <input data-time=start type='text' placeholder="00:00"></textarea>
-            <input data-time=end type='text' placeholder="00:00"></textarea>
+            <input class='add-time' data-time=start type='text' placeholder="00:00"></textarea>
+            <input class='add-time' data-time=end type='text' placeholder="00:00"></textarea>
           </span>
           <br>
         </div>
@@ -111,7 +111,7 @@ $(() => {
       let $year = monthAndYear[1];
       let $date = `${$month} ${$day} ${$year}`;
       let dateClass = `${$year}-${monthNum}-${$day}`
-      if ($('p').hasClass(dateClass)) {
+      if ($('div').hasClass(dateClass)) {
         $(`div.${dateClass}`).remove();
         selectedDates.splice(selectedDates.indexOf(dateClass), 1);
       } else {
@@ -201,7 +201,7 @@ $(() => {
           description: $('[name=description]').val(),
           name: $('[name=name]').val(),
           email: $('[name=email]').val(),
-          times: times;
+          times: times,
           unique_url: uniqueUrl
         }
       }).done(() => {
@@ -220,8 +220,8 @@ $(() => {
     event.preventDefault();
     let timeslot =
     `<span class='timeslot-pair'>
-      <input data-time=start type='text' placeholder="00:00"></textarea>
-      <input data-time=end type='text' placeholder="00:00"></textarea>
+      <input class='add-time' data-time=start type='text' placeholder="00:00"></textarea>
+      <input class='add-time' data-time=end type='text' placeholder="00:00"></textarea>
     </span>
     <br>`
     $(this).parent().children('.time-input').append(timeslot);
@@ -311,8 +311,8 @@ $(() => {
   // Add new attendees to the event page
   $('.event-details').on('click', '.fa-plus', function (e) {
     $(this).parent('.addAttendee').remove();
-    let eventInfo = `<tr><td><input type="text" name="newName" placeholder="Name">
-      </input><br><input type="text" name="newEmail" placeholder="Email"></input>
+    let eventInfo = `<tr><td><input class="new-attendee" type="text" name="newName" placeholder="Name">
+      </input><br><input class="new-attendee" type="text" name="newEmail" placeholder="Email"></input>
         <i class="fas fa-user-plus"></i></td>`;
 
     times.forEach((time) => {
