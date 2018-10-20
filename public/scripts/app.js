@@ -370,6 +370,7 @@ $(() => {
     e.preventDefault();
     const URL = window.location.href;
     const uniqueURL = URL.slice(-12);
+    const $availability = $(this).parent().siblings('.availability');
     const $name = $(this).siblings('input[name=newName]').val();
     const $email = $(this).siblings('input[name=newEmail]').val();
     const timesAttendees = [];
