@@ -249,7 +249,7 @@ $(() => {
         // Load timeslots
         var eventInfo = `<tr><th></th>`
         times.forEach((time) => {
-          eventInfo += `<th>${formatDate(new Date(time.start))} <br> ${formatDate(new Date(time.end))}</th>`
+          eventInfo += `<th class="timeslot">${formatDate(new Date(time.start))} <br> ${formatDate(new Date(time.end))}</th>`
         })
         eventInfo += `</tr>`;
 
@@ -266,13 +266,46 @@ $(() => {
           eventInfo += `</tr>`;
         })
 
-        eventInfo += `<td><i class="fas fa-plus"></i></td>`
+        eventInfo += `<td class="addAttendee"><i class="fas fa-plus"></i></td>`
 
         $(".time-slots").append(eventInfo);
+        eventInfo = '';
 
         timesAttendees.forEach((availability) => {
           $(`td[data-time-id = ${availability.time_id}][data-attendee-id = ${availability.attendee_id}]`).addClass('bg-success');
         })
       });
   }
+
+  $('.event-details').on('click', 'fa-plus', function (e) {
+    // First off, when you click on the plus, it will delete the cell with the plus icon;
+    // Then it will add a new template asking for name, email, and availability (YES OR NO ONLY)
+    // And the nit will readd the table cell with the plus icon
+    // Maybe go and get db information or give specific cells data-types
+    $(this).parent('.addAttendee').del();
+    eventInfo += `<tr><td><input type="text" name="newName" placeholder="Name"></input><br><input type="text" name="newEmail" placeholder="Email"></input></td>`;
+    // for each timeslot add a clickable table cell; maybe make a class like "editAvailability"
+
+    // After all, readd the plus Icon
+    eventInfo += `</tr><td class="addAttendee"><i class="fas fa-plus"></i></td>`;
+    // Also add a `submit` button to send the info through an ajax call to the db
+  });
+
+  $('.event-details').on('click', 'fa-edit', function (e) {
+    // For every availability table cells, make them clickable
+
+
+    // Also add a `submit` button to send the updated info through an ajax call to the db
+  })
+
+  $('.event-details').on('click', '#submitNewAttendee', function (e) {
+    e.preventDefault();
+    // Add a new attendee to the db and refresh the page
+    // Also check if the email is already in the db //!!! LAST !!!
+  });
+
+  $('.event-details').on('click', '#submitEditAttendee', function (e) {
+    e.preventDefault();
+    // Edit/Update an attendee's availability in the db and refresh the page
+  })
 });
