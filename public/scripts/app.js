@@ -57,7 +57,6 @@ $(() => {
         return dateA[0] - dateB[0];
       }
     })
-    console.log(selectedDates);
     selectedDates.forEach(function (element) {
       let date = element.split("-");
       let year = date[0];
@@ -191,7 +190,6 @@ $(() => {
           time_start: time_start,
           time_end: time_end
         });
-        console.log(times);
       });
       $.ajax({
         method: "POST",
@@ -243,7 +241,6 @@ $(() => {
           <h1>Event Details</h1>
           <p>Event title: ${result[0].title}</p>
           <p>Event description: ${result[0].description}</p>`;
-
         $(".event-details").prepend(eventDetails);
 
         //Filter through the attendees
