@@ -39,7 +39,7 @@ $(() => {
 
   function getTimeSlots() {
     let result = "";
-    selectedDates.sort(function(a,b) {
+    selectedDates.sort(function (a, b) {
       let dateA = a.split("-");
       let dateB = b.split("-");
       //Check year
@@ -56,13 +56,13 @@ $(() => {
       }
     })
     console.log(selectedDates);
-    selectedDates.forEach(function(element) {
+    selectedDates.forEach(function (element) {
       let date = element.split("-");
       let year = date[0];
       let month = getMonth(months, date[1]);
       let day = date[2];
       result +=
-      `<p class=${element}>${month} ${day} ${year}</p>
+        `<p class=${element}>${month} ${day} ${year}</p>
       <input class=${element} type='text' placeholder="00:00"></textarea>
       <input class=${element} type='text' placeholder="00:00"></textarea>
       <button class=${element}>+</button>
@@ -72,8 +72,8 @@ $(() => {
   }
 
   function getMonth(months, num) {
-  return Object.keys(months).find(key => months[key] === num);
-}
+    return Object.keys(months).find(key => months[key] === num);
+  }
 
   var selectedDates = [];
   var months = {
@@ -107,11 +107,11 @@ $(() => {
         $(`.${dateClass}`).remove();
         selectedDates.splice(selectedDates.indexOf(dateClass), 1);
       } else {
-      selectedDates.push(dateClass);
-      $(this).parents().siblings('.times')
-        .empty()
-        .append(getTimeSlots());
-      $(".submit").css("display", "block");
+        selectedDates.push(dateClass);
+        $(this).parents().siblings('.times')
+          .empty()
+          .append(getTimeSlots());
+        $(".submit").css("display", "block");
       }
     }
   });
@@ -258,13 +258,16 @@ $(() => {
         console.log(times);
         console.log(timesAttendees);
         attendees.forEach((attendee) => {
-          eventInfo += `<tr><td>${attendee.name} <br> ${attendee.email}</td>`;
+          eventInfo += `<tr><td>${attendee.name} <br> ${attendee.email}<i class="fas fa-user-edit"></i></td>`;
 
           times.forEach((time) => {
             eventInfo += `<td data-time-id=${time.id} data-attendee-id=${attendee.id}></td>`
           })
           eventInfo += `</tr>`;
         })
+
+        eventInfo += `<td><i class="fas fa-plus"></i></td>`
+
         $(".time-slots").append(eventInfo);
 
         timesAttendees.forEach((availability) => {
