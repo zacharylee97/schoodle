@@ -284,7 +284,7 @@ $(() => {
         <i class="fas fa-user-plus"></i></td>`;
 
     times.forEach((time) => {
-      eventInfo += `<td class="newAvailability" data-time-id="${time.id}"></td>`
+      eventInfo += `<td class="newAvailability notAvailable" data-time-id="${time.id}"></td>`
     });
 
     eventInfo += `</tr><td colspan="3" class="addAttendee"><i class="fas fa-plus"></i></td>`;
@@ -297,13 +297,18 @@ $(() => {
     console.log($(this).parent().siblings().addClass(`newAvailability`));
   })
 
-  $('.event-details').on('click', 'fa-user-plus', function (e) {
+  $('.event-details').on('click', '.newAvailability', function (e) {
+    e.preventDefault();
+    $(this).toggleClass('notAvailable available');
+  });
+
+  $('.event-details').on('click', '.fa-user-plus', function (e) {
     e.preventDefault();
     // Add a new attendee to the db and refresh the page
     // Also check if the email is already in the db //!!! LAST !!!
   });
 
-  $('.event-details').on('click', '#submitEditAttendee', function (e) {
+  $('.event-details').on('click', '.fa-user-check', function (e) {
     e.preventDefault();
     // Edit/Update an attendee's availability in the db and refresh the page
   })
