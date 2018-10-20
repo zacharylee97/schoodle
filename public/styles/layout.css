@@ -2,7 +2,6 @@ nav {
   width: 100%;
   background-color: #EEE;
 }
-
 nav span {
   font-size: 1.5rem;
 }
@@ -11,65 +10,52 @@ body {
   background-color: White;
   font-family: "Comfortaa", cursive;
 }
-
 body .homepage {
   display: flex;
   flex-direction: row;
 }
-
 body .homepage .leftbg {
   background-image: url(autumn_forest.jpg);
   filter: opacity(50%);
 }
-
 body .homepage .rightbg {
   background-image: url(autumn_forest.jpg);
   filter: opacity(50%);
 }
-
 body .homepage div {
   height: 680px;
   width: 400px;
 }
-
 body .homepage div:nth-of-type(2) {
   min-width: 800px;
   text-align: center;
 }
-
 body .new-event {
   width: 55%;
   margin: 0 auto;
   text-align: center;
 }
-
 body .new-event .calendar {
   padding: 10px 0;
 }
-
 body .new-event .calendarCell:hover {
   cursor: pointer;
 }
-
 body .new-event .calendarOutsideMonth:hover {
   cursor: default;
 }
-
 body .new-event .calendarTable {
   margin: 0;
   padding: 5px;
   float: left;
 }
-
 body .new-event .calendarTable .calendarCell {
   border: 1px solid transparent;
   padding: 5px;
 }
-
 body .new-event .calendarTable .calendarSelectedCell {
   border: 1px solid #000;
 }
-
 body .new-event .calendarHeader {
   display: flex;
   justify-content: space-between;
@@ -77,18 +63,24 @@ body .new-event .calendarHeader {
   padding: 5px;
   text-align: left;
 }
-
 body .new-event .calendarHeader .fa-arrow-left {
   margin: 5px 10px;
 }
-
 body .new-event .calendarHeader .fa-arrow-right {
   margin: 5px 10px;
 }
-
 body .event-details {
   width: 55%;
   margin: 0 auto;
+}
+body .event-details .newAvailability {
+  cursor: pointer;
+}
+body .event-details .notAvailable {
+  background-color: #f13e3e;
+}
+body .event-details .available {
+  background-color: #0fb10f;
 }
 
 .times {
@@ -116,3 +108,5 @@ body .event-details {
 input {
   width: 50px;
 }
+
+/*# sourceMappingURL=layout.css.map */

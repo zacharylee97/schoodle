@@ -72,8 +72,6 @@ body {
       .fa-arrow-left {
         margin: 5px 10px;
       }
-      .calendarDate {
-      }
       .fa-arrow-right {
         margin: 5px 10px;
       }
@@ -82,6 +80,15 @@ body {
   .event-details {
     width: 55%;
     margin: 0 auto;
+    .newAvailability {
+      cursor: pointer;
+    }
+    .notAvailable {
+      background-color: #f13e3e; 
+    }
+    .available {
+      background-color: #0fb10f; 
+    }
   }
 }
 
