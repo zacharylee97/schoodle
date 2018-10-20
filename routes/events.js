@@ -35,7 +35,8 @@ function insertTimes(timeslot) {
           })
       })
     })
-  }
+  ]);
+}
 
   // Modify a specific event's attendees and their availability
   router.post("/:unique_url", (req, res) => {

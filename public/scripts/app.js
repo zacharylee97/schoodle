@@ -57,10 +57,7 @@ $(() => {
         return dateA[0] - dateB[0];
       }
     })
-<<<<<<< HEAD
 
-=======
->>>>>>> feature/new-event
     selectedDates.forEach(function (element) {
       let date = element.split("-");
       let year = date[0];
