@@ -86,6 +86,36 @@ body .new-event .calendarHeader .fa-arrow-right {
   margin: 5px 10px;
 }
 
+body .new-event .times {
+  margin-left: 50px;
+  float: right;
+}
+
+body .new-event .times .add-time {
+  width: 50px;
+}
+
+body .new-event .times .add-timeslot {
+  width: 100px;
+}
+
+body .new-event .times .add-timeslot:hover {
+  cursor: pointer;
+}
+
+body .new-event .submit {
+  display: none;
+  float: right;
+}
+
+body .new-event .submit:hover {
+  cursor: pointer;
+}
+
+body .new-event .fas:hover {
+  cursor: pointer;
+}
+
 body .event-details {
   width: 55%;
   margin: 0 auto;
@@ -103,36 +133,6 @@ body .event-details .available {
   background-color: #0fb10f;
 }
 
-.times {
-  margin-left: 50px;
-  float: right;
-}
-
-.time-slots {
-  width: 500px;
-}
-
-.add-timeslot {
-  width: 100px;
-}
-
-.submit {
-  display: none;
-  float: right;
-}
-
-.submit:hover {
-  cursor: pointer;
-}
-
-.fas:hover {
-  cursor: pointer;
-}
-
-.add-timeslot:hover {
-  cursor: pointer;
-}
-
-input {
-  width: 50px;
+body .event-details .add-attendee {
+  width: 150px;
 }
