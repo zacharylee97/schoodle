@@ -111,7 +111,7 @@ $(() => {
       let $year = monthAndYear[1];
       let $date = `${$month} ${$day} ${$year}`;
       let dateClass = `${$year}-${monthNum}-${$day}`
-      if ($('p').hasClass(dateClass)) {
+      if ($('div').hasClass(dateClass)) {
         $(`div.${dateClass}`).remove();
         selectedDates.splice(selectedDates.indexOf(dateClass), 1);
       } else {
@@ -201,16 +201,13 @@ $(() => {
           description: $('[name=description]').val(),
           name: $('[name=name]').val(),
           email: $('[name=email]').val(),
-          times: times;
+          times: times,
           unique_url: uniqueUrl
         }
       }).done(() => {
         window.location.href = `/events/${uniqueUrl}`;
       });
     } else {
-      timeSlots.forEach(function(element) {
-        console.log(element.val);
-      })
       alert("Please fill in the form!");
     }
   });
