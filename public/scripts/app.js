@@ -63,14 +63,16 @@ $(() => {
       let day = date[2];
       result +=
       `<div class=${element}>
-        <p class=${element}>${month} ${day} ${year}</p>
-        <div class="time-input">
-          <input class=${element} type='text' placeholder="00:00"></textarea>
-          <input class=${element} type='text' placeholder="00:00"></textarea>
+        <p class=timeslot-header>${month} ${day} ${year}</p>
+        <div class=time-input data-date=${element}>
+          <span class='timeslot-pair'>
+            <input data-time=start type='text' placeholder="00:00"></textarea>
+            <input data-time=end type='text' placeholder="00:00"></textarea>
+          </span>
           <br>
         </div>
-        <button class="${element} add-timeslot">+</button>
-      </div>`
+        <button class="add-timeslot">+</button>
+      </div>`;
     });
     return result;
   }
@@ -177,6 +179,18 @@ $(() => {
     const formValid = checkForm();
     if (formValid) {
       let uniqueUrl = generateRandomString(12);
+      let times = [];
+      $('.time-input').children('.timeslot-pair').each(function(index, element) {
+        let date = $(this).parent().data('date');
+        let time_start = $(this).children("input[data-time='start']").val();
+        let time_end = $(this).children("input[data-time='end']").val();
+        times.push({
+          'date': date,
+          'time_start': time_start,
+          'time_end': time_end
+        });
+        console.log(times);
+      });
       $.ajax({
         method: "POST",
         url: "/events",
@@ -193,6 +207,9 @@ $(() => {
         window.location.href = `/events/${uniqueUrl}`;
       });
     } else {
+      timeSlots.forEach(function(element) {
+        console.log(element.val);
+      })
       alert("Please fill in the form!");
     }
   });
@@ -201,8 +218,10 @@ $(() => {
   $('.times').on('click','.add-timeslot', function (event) {
     event.preventDefault();
     let timeslot =
-    `<input type='text' placeholder="00:00"></textarea>
-    <input type='text' placeholder="00:00"></textarea>
+    `<span class='timeslot-pair'>
+      <input data-time=start type='text' placeholder="00:00"></textarea>
+      <input data-time=end type='text' placeholder="00:00"></textarea>
+    </span>
     <br>`
     $(this).parent().children('.time-input').append(timeslot);
   });
