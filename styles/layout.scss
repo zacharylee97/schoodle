@@ -96,6 +96,9 @@ body {
     .newAvailability {
       cursor: pointer;
     }
+    .fas {
+      cursor: pointer;
+    }
     .notAvailable {
       background-color: #f13e3e;
     }
@@ -107,6 +110,3 @@ body {
     }
   }
 }
-.fas:hover {
-  cursor: pointer;
-  }
