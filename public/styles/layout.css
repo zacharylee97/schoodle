@@ -91,6 +91,18 @@ body .event-details {
   margin: 0 auto;
 }
 
+body .event-details .newAvailability {
+  cursor: pointer;
+}
+
+body .event-details .notAvailable {
+  background-color: #f13e3e;
+}
+
+body .event-details .available {
+  background-color: #0fb10f;
+}
+
 .times {
   margin-left: 50px;
   float: right;

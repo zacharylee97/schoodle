@@ -1,4 +1,6 @@
 $(() => {
+  var times;
+
   function generateRandomString(lengthURL) {
     const possibleChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
     let randomURL = "";
@@ -268,7 +270,7 @@ $(() => {
             id: time.times_id
           });
         });
-        var times = multiDimensionalUnique(timesInfo);
+        times = multiDimensionalUnique(timesInfo);
 
         // Takes every connection between times and attendees
         const timesAttendees = [];
@@ -287,57 +289,59 @@ $(() => {
         eventInfo += `</tr>`;
 
         // Load every attendees with their availability
-        console.log(attendees);
-        console.log(times);
-        console.log(timesAttendees);
         attendees.forEach((attendee) => {
-          eventInfo += `<tr><td>${attendee.name} <br> ${attendee.email}<i class="fas fa-user-edit"></i></td>`;
+          eventInfo += `<tr><td data-attendee-id=${attendee.id}>${attendee.name} <br> ${attendee.email}<i class="fas fa-user-edit"></i></td>`;
 
           times.forEach((time) => {
-            eventInfo += `<td data-time-id=${time.id} data-attendee-id=${attendee.id}></td>`
+            eventInfo += `<td class="notAvailable" data-time-id=${time.id} data-attendee-id=${attendee.id}></td>`
           })
           eventInfo += `</tr>`;
         })
 
-        eventInfo += `<td class="addAttendee"><i class="fas fa-plus"></i></td>`
+        eventInfo += `<td colspan="3" class="addAttendee"><i class="fas fa-plus"></i></td>`
 
         $(".time-slots").append(eventInfo);
         eventInfo = '';
 
         timesAttendees.forEach((availability) => {
-          $(`td[data-time-id = ${availability.time_id}][data-attendee-id = ${availability.attendee_id}]`).addClass('bg-success');
+          $(`td[data-time-id = ${availability.time_id}][data-attendee-id = ${availability.attendee_id}]`).toggleClass('notAvailable available');
         })
       });
   }
 
-  $('.event-details').on('click', 'fa-plus', function (e) {
-    // First off, when you click on the plus, it will delete the cell with the plus icon;
-    // Then it will add a new template asking for name, email, and availability (YES OR NO ONLY)
-    // And the nit will readd the table cell with the plus icon
-    // Maybe go and get db information or give specific cells data-types
-    $(this).parent('.addAttendee').del();
-    eventInfo += `<tr><td><input type="text" name="newName" placeholder="Name"></input><br><input type="text" name="newEmail" placeholder="Email"></input></td>`;
-    // for each timeslot add a clickable table cell; maybe make a class like "editAvailability"
+  // Add new attendees to the event page and to the db
+  $('.event-details').on('click', '.fa-plus', function (e) {
+    $(this).parent('.addAttendee').remove();
+    let eventInfo = `<tr><td><input type="text" name="newName" placeholder="Name">
+      </input><br><input type="text" name="newEmail" placeholder="Email"></input>
+        <i class="fas fa-user-plus"></i></td>`;
 
-    // After all, readd the plus Icon
-    eventInfo += `</tr><td class="addAttendee"><i class="fas fa-plus"></i></td>`;
-    // Also add a `submit` button to send the info through an ajax call to the db
+    times.forEach((time) => {
+      eventInfo += `<td class="newAvailability notAvailable" data-time-id="${time.id}"></td>`
+    });
+
+    eventInfo += `</tr><td colspan="3" class="addAttendee"><i class="fas fa-plus"></i></td>`;
+
+    $(".time-slots").append(eventInfo);
   });
 
-  $('.event-details').on('click', 'fa-edit', function (e) {
-    // For every availability table cells, make them clickable
-
-
-    // Also add a `submit` button to send the updated info through an ajax call to the db
+  $('.event-details').on('click', '.fa-user-edit', function (e) {
+    $(this).toggleClass('fa-user-edit fa-user-check');
+    console.log($(this).parent().siblings().addClass(`newAvailability`));
   })
 
-  $('.event-details').on('click', '#submitNewAttendee', function (e) {
+  $('.event-details').on('click', '.newAvailability', function (e) {
+    e.preventDefault();
+    $(this).toggleClass('notAvailable available');
+  });
+
+  $('.event-details').on('click', '.fa-user-plus', function (e) {
     e.preventDefault();
     // Add a new attendee to the db and refresh the page
     // Also check if the email is already in the db //!!! LAST !!!
   });
 
-  $('.event-details').on('click', '#submitEditAttendee', function (e) {
+  $('.event-details').on('click', '.fa-user-check', function (e) {
     e.preventDefault();
     // Edit/Update an attendee's availability in the db and refresh the page
   })
