@@ -53,10 +53,13 @@ $(() => {
       let day = date[2];
       result +=
       `<div class=${element}>
-      <p class=${element}>${month} ${day} ${year}</p>
-      <button class="${element} add-timeslot">+</button>
-      <input class=${element} type='text' placeholder="00:00"></textarea>
-      <input class=${element} type='text' placeholder="00:00"></textarea>
+        <p class=${element}>${month} ${day} ${year}</p>
+        <div class="time-input">
+          <input class=${element} type='text' placeholder="00:00"></textarea>
+          <input class=${element} type='text' placeholder="00:00"></textarea>
+          <br>
+        </div>
+        <button class="${element} add-timeslot">+</button>
       </div>`
     });
     return result;
@@ -95,7 +98,7 @@ $(() => {
       let $date = `${$month} ${$day} ${$year}`;
       let dateClass = `${$year}-${monthNum}-${$day}`
       if ($('p').hasClass(dateClass)) {
-        $(`.${dateClass}`).remove();
+        $(`div.${dateClass}`).remove();
         selectedDates.splice(selectedDates.indexOf(dateClass), 1);
       } else {
       selectedDates.push(dateClass);
@@ -189,8 +192,9 @@ $(() => {
     event.preventDefault();
     let timeslot =
     `<input type='text' placeholder="00:00"></textarea>
-    <input type='text' placeholder="00:00"></textarea>`
-    $(this).parent().append(timeslot);
+    <input type='text' placeholder="00:00"></textarea>
+    <br>`
+    $(this).parent().children('.time-input').append(timeslot);
   });
 
   //Onclick function for create-new-event button
