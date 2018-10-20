@@ -89,10 +89,7 @@ body {
       .submit:hover {
         cursor: pointer;
       }
-    .fas:hover {
-      cursor: pointer;
     }
-      }
   .event-details {
     width: 55%;
     margin: 0 auto;
@@ -110,3 +107,6 @@ body {
     }
   }
 }
+.fas:hover {
+  cursor: pointer;
+  }

@@ -111,7 +111,7 @@ $(() => {
       let $year = monthAndYear[1];
       let $date = `${$month} ${$day} ${$year}`;
       let dateClass = `${$year}-${monthNum}-${$day}`
-      if ($('p').hasClass(dateClass)) {
+      if ($('div').hasClass(dateClass)) {
         $(`div.${dateClass}`).remove();
         selectedDates.splice(selectedDates.indexOf(dateClass), 1);
       } else {
