@@ -1,5 +1,8 @@
 # Node Skeleton
 
+A simple doodle clone for you and your friends to organize an event with multiple time possibilities.
+Mid-term project with [Zachary](https://github.com/zacharylee97)
+
 ## Getting Started
 
 1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
@@ -13,21 +16,20 @@
 7. Run the server: `npm run local`
 8. Visit `http://localhost:8080/`
 
-## Functionalities to Implement
-* visitors can create an event proposal in much the same way as Doodle, by specifying:
-  * event title and description
-  * their own name and email
-* organizers can then send the unique URL to possible attendees via their own communication workflow (email, Slack, Messenger, etc.)
-* attendees visit the unique URL and:
-  * specify their name and email
-  * specify their availability (yes/no only) for each possible time slot
-  * view all responses including their own
-  * modify their response
-* the unique URL should be secret and thus not use a simple auto-incrementing integer but instead a larger ID that is harder to guess (much like how secret gists work on GitHub)
-* note: this app does not follow the typical user authentication process: users don't need to register or log in and the only way to access the Schoodles is via links
-
-
 ## Dependencies
 
 - Node 5.10.x or above
 - NPM 3.8.x or above
+- Body-parser 1.15.2 or above
+- Dotenv 2.0.0 or above
+- Ejs 2.4.1 or above
+- Express 4.13.4 or above
+- Knex 0.11.7 or above
+- Knex-logger 0.1.0 or above
+- Morgan 1.7.0 or above
+- Node-sass-middleware 0.9.8 or above
+- Pg 6.0.2 or above
+
+## Screenshots
+
+!["Screenshot of an event"](https://github.com/Levasseur-Sp/schoodle/blob/master/public/images/event-sample.png)
