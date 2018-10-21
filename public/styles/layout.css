@@ -21,10 +21,12 @@ body .homepage {
 
 body .homepage .leftbg {
   background-image: url(autumn_forest.jpg);
+  background-repeat: repeat-y;
 }
 
 body .homepage .rightbg {
   background-image: url(autumn_forest.jpg);
+  background-repeat: repeat-y;
 }
 
 body .homepage .homepageMessage {
