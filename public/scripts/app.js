@@ -26,7 +26,7 @@ $(() => {
 
   // Checks the form on the new-event page to see it all the required spots are filled
   function checkForm() {
-    if ($('[name=title]').val() && $('[name=description]').val() && $('[name=name]').val() && $('[name=email]').val() && $('.add-time').val()) {
+    if ($('[name=title]').val() && $('[name=description]').val() && $('[name=name]').val() && $('[name=email]').val()) {
       return true;
     } else {
       return false;

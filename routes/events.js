@@ -49,7 +49,7 @@ module.exports = (knex) => {
           going: true
         }).then(() => {})
     }
-    if (availability.going == 'false') {
+    else if (availability.going == 'false') {
       knex('times_attendees')
         .where({
           times_id: availability.times_id,
