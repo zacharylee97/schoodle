@@ -292,7 +292,7 @@ $(() => {
           eventInfo += `</tr>`;
         })
 
-        eventInfo += `<td colspan="1" class="addAttendee"><i class="fas fa-plus"></i></td>`
+        eventInfo += `<td colspan="${1 + times.length}" class="addAttendee"><i class="fas fa-plus"></i></td>`
 
         $(".time-slots").append(eventInfo);
         eventInfo = '';
