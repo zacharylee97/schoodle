@@ -81,6 +81,39 @@ module.exports = (knex) => {
     })
   })
 
+  function insertTimesAttendees(attendeesID, availability) {
+    console.log(availability);
+    return Promise.all([
+      knex('times_attendees').insert({
+        times_id: parseInt(availability['time_id']),
+        attendees_id: parseInt(attendeesID),
+        going: availability['going']
+      })
+    ])
+  }
+
+  //Add an attendee to specific event
+  router.post("/:unique_url/new-attendee", (req, res) => {
+    return Promise.all([
+      knex('attendees')
+        .insert({
+          name: req.body.name,
+          email: req.body.email
+        }, 'id')
+        .then((foreignAttendeesID) => {
+          req.body.times_attendees_going.forEach((availability) => {
+          insertTimesAttendees(foreignAttendeesID, availability);
+        })
+      })
+    ])
+      .catch(err => {
+        console.error(err)
+      })
+      .then((re) => {
+        res.json(re);
+      })
+  })
+
   // Post new event
   router.post("/", (req, res) => {
     const times = req.body.times;
