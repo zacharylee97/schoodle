@@ -1,6 +1,8 @@
 nav {
+  position: fixed;
   width: 100%;
-  background-color: #EEE;
+  background-color: #2d2d2d;
+  color: #e1e1e1;
 }
 
 nav span {
@@ -19,12 +21,18 @@ body .homepage {
 
 body .homepage .leftbg {
   background-image: url(autumn_forest.jpg);
-  filter: opacity(50%);
 }
 
 body .homepage .rightbg {
   background-image: url(autumn_forest.jpg);
-  filter: opacity(50%);
+}
+
+body .homepage .homepageMessage {
+  padding: 1em;
+}
+
+body .homepage .homepageBtn {
+  margin: 5em auto;
 }
 
 body .homepage div {

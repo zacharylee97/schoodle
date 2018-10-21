@@ -224,7 +224,7 @@ $(() => {
   });
 
   //Onclick function for create-new-event button
-  $("#new-event-btn").click(function () {
+  $(".btn-primary").click(function () {
     window.location.href = "/events/new";
   });
 
