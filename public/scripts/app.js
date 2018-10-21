@@ -1,6 +1,7 @@
 $(() => {
   var times;
 
+  // Generates a random alpha-numerical string of the given lengthURL length
   function generateRandomString(lengthURL) {
     const possibleChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
     let randomURL = "";
@@ -8,7 +9,9 @@ $(() => {
       randomURL += possibleChars.charAt(Math.floor(Math.random() * possibleChars.length));
     }
     return randomURL;
-  }
+  };
+
+  // Takes in a multidimensional array and filters out the duplicate by making every values into a JSON string
   function multiDimensionalUnique(arr) {
     var uniques = [];
     var itemsFound = {};
@@ -19,26 +22,18 @@ $(() => {
       itemsFound[stringified] = true;
     }
     return uniques;
-  }
+  };
 
-  function formatDate(date) {
-    return [date.getFullYear(),
-    date.getMonth() + 1,
-    date.getDate()].join('-') + ' ' +
-      [date.getHours(),
-      date.getMinutes(),
-      date.getSeconds()].join(':');
-  }
-
-
+  // Checks the form on the new-event page to see it all the required spots are filled
   function checkForm() {
     if ($('[name=title]').val() && $('[name=description]').val() && $('[name=name]').val() && $('[name=email]').val()) {
       return true;
     } else {
       return false;
     }
-  }
+  };
 
+  // Takes the information from the timeslots in the new-event page
   function getTimeSlots() {
     let result = "";
     selectedDates.sort(function (a, b) {
@@ -79,6 +74,7 @@ $(() => {
     return result;
   }
 
+  // Get the literal month from an date object (0-11)
   function getMonth(months, num) {
     return Object.keys(months).find(key => months[key] === num);
   }
@@ -296,7 +292,7 @@ $(() => {
           eventInfo += `</tr>`;
         })
 
-        eventInfo += `<td colspan="1" class="addAttendee"><i class="fas fa-plus"></i></td>`
+        eventInfo += `<td colspan="${1 + times.length}" class="addAttendee"><i class="fas fa-plus"></i></td>`
 
         $(".time-slots").append(eventInfo);
         eventInfo = '';

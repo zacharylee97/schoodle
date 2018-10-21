@@ -3,8 +3,6 @@
 const express = require('express');
 const router = express.Router();
 
-const formatDate = require('../formatDate')
-
 module.exports = (knex) => {
   // Create new event page
   router.get("/new", (req, res) => {
@@ -16,6 +14,7 @@ module.exports = (knex) => {
     res.render("event");
   });
 
+  // Adds the timeslot(s) from the new-event page post request to the times and times_attendees tables
   function insertTimes(timeslot) {
     return Promise.all([
       knex('events').max('id')
@@ -36,12 +35,11 @@ module.exports = (knex) => {
           })
         })
     ]);
-  }
+  };
 
+  // Modify the availability of an antendee
   function modifyAvailability(availability) {
-    console.log(availability);
     if (availability.going == 'true') {
-      console.log(`Added to db! Going: ${availability.going}, times_id: ${availability.times_id}, attendees_id: ${availability.attendees_id}`);
       knex('times_attendees')
         .where({
           times_id: availability.times_id,
@@ -49,13 +47,9 @@ module.exports = (knex) => {
         })
         .update({
           going: true
-        }).then(() => {
-          console.log(`Success for going`);
-        })
+        }).then(() => {})
     }
-    if (availability.going == 'false') {
-      console.log(`Removed from db! Going: ${availability.going}, times_id: ${availability.times_id}, attendees_id: ${availability.attendees_id}`);
-      // Need to update this here!
+    else if (availability.going == 'false') {
       knex('times_attendees')
         .where({
           times_id: availability.times_id,
@@ -63,15 +57,12 @@ module.exports = (knex) => {
         })
         .update({
           going: false
-        }).then(() => {
-          console.log(`Success for not going`);
-        })
+        }).then(() => {})
     }
-  }
+  };
 
   // Modify a specific event's attendees and their availability
   router.post("/:unique_url", (req, res) => {
-    console.log(req.body);
     return Promise.all([
       req.body.times_attendees.forEach((availability) => {
         modifyAvailability(availability);
@@ -79,18 +70,18 @@ module.exports = (knex) => {
     ]).then(() => {
       res.redirect(`${req.body.unique_url}`)
     })
-  })
+  });
 
+  // Adds the given attendee to the times_attendees table with the appropriate information
   function insertTimesAttendees(attendeesID, availability) {
-    console.log(availability);
     return Promise.all([
       knex('times_attendees').insert({
         times_id: parseInt(availability['time_id']),
         attendees_id: parseInt(attendeesID),
         going: availability['going']
       })
-    ])
-  }
+    ]);
+  };
 
   //Add an attendee to specific event
   router.post("/:unique_url/new-attendee", (req, res) => {
@@ -112,7 +103,7 @@ module.exports = (knex) => {
       .then((re) => {
         res.json(re);
       })
-  })
+  });
 
   // Post new event
   router.post("/", (req, res) => {
@@ -145,7 +136,7 @@ module.exports = (knex) => {
       })
   });
 
-  //Retrieve event info from database
+  // Retrieve event info from database
   router.get("/:unique_url/info", (req, res) => {
     return knex.select([
       'attendees.id as attendees_id',
@@ -172,6 +163,4 @@ module.exports = (knex) => {
   });
 
   return router;
-}
-
-
+};
