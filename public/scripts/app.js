@@ -296,7 +296,7 @@ $(() => {
           eventInfo += `</tr>`;
         })
 
-        eventInfo += `<td colspan="3" class="addAttendee"><i class="fas fa-plus"></i></td>`
+        eventInfo += `<td colspan="1" class="addAttendee"><i class="fas fa-plus"></i></td>`
 
         $(".time-slots").append(eventInfo);
         eventInfo = '';
@@ -322,7 +322,7 @@ $(() => {
       eventInfo += `<td class="newAvailability notAvailable availability" data-time-id="${time.id}"></td>`
     });
 
-    eventInfo += `</tr><td colspan="3" class="addAttendee"><i class="fas fa-plus"></i></td>`;
+    // eventInfo += `</tr><td colspan="3" class="addAttendee"><i class="fas fa-plus"></i></td>`;
 
     $(".time-slots").append(eventInfo);
   });
