@@ -70,18 +70,6 @@ module.exports = (knex) => {
       })
   }
 
-  //Add an attendee to specific event
-   router.post("/:unique_url/new", (req, res) => {
-    return Promise.all([
-      console.log(req.body.unique_url)
-      console.log(req.body.name)
-      console.log(req.body.email)
-      console.log(req.body.times_attendees_going)
-    ]).then(() => {
-      res.redirect(`${req.body.unique_url}`)
-    })
-  })
-
   // Modify a specific event's attendees and their availability
   router.post("/:unique_url", (req, res) => {
     return Promise.all([
@@ -91,6 +79,39 @@ module.exports = (knex) => {
     ]).then(() => {
       res.redirect(`${req.body.unique_url}`)
     })
+  })
+
+  function insertTimesAttendees(attendeesID, availability) {
+    console.log(availability);
+    return Promise.all([
+      knex('times_attendees').insert({
+        times_id: parseInt(availability['time_id']),
+        attendees_id: parseInt(attendeesID),
+        going: availability['going']
+      })
+    ])
+  }
+
+  //Add an attendee to specific event
+  router.post("/:unique_url/new-attendee", (req, res) => {
+    return Promise.all([
+      knex('attendees')
+        .insert({
+          name: req.body.name,
+          email: req.body.email
+        }, 'id')
+        .then((foreignAttendeesID) => {
+          req.body.times_attendees_going.forEach((availability) => {
+          insertTimesAttendees(foreignAttendeesID, availability);
+        })
+      })
+    ])
+      .catch(err => {
+        console.error(err)
+      })
+      .then((re) => {
+        res.json(re);
+      })
   })
 
   // Post new event

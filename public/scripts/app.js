@@ -384,7 +384,7 @@ $(() => {
     });
     $.ajax({
       method: "POST",
-      url: `/events/${uniqueURL}/new`,
+      url: `/events/${uniqueURL}/new-attendee`,
       data: {
         unique_url: uniqueURL,
         name: $name,
@@ -392,7 +392,7 @@ $(() => {
         times_attendees_going: timesAttendees
       }
     }).done(() => {
-      window.location.href = `${uniqueURL}`;
+      window.location.href = `${URL}`;
     });
   })
 });
