@@ -31,6 +31,11 @@ body .homepage .homepageMessage {
   padding: 1em;
 }
 
+body .homepage .homepageMessage .picture {
+  padding: 10px;
+  width: 80%;
+}
+
 body .homepage .homepageBtn {
   margin: 5em auto;
 }
