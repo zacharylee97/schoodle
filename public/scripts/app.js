@@ -236,8 +236,8 @@ $(() => {
         //Display event details
         const eventDetails = `
           <h1>Event Details</h1>
-          <p>Event title: ${result[0].title}</p>
-          <p>Event description: ${result[0].description}</p>`;
+          <h6><strong>Event title</strong>: ${result[0].title}</h6>
+          <h6><strong>Event description</strong>: ${result[0].description}</h6>`;
         $(".event-details").prepend(eventDetails);
 
         //Filter through the attendees
