@@ -73,7 +73,7 @@ $(() => {
           </span>
           <br>
         </div>
-        <button class="add-timeslot">+</button>
+        <button class="btn btn-success add-timeslot">+</button>
       </div>`;
     });
     return result;
