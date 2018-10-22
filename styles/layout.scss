@@ -109,9 +109,6 @@ body {
     .newAvailability {
       cursor: pointer;
     }
-    .fas {
-      cursor: pointer;
-    }
     .notAvailable {
       background-color: #f13e3e;
     }
@@ -124,5 +121,8 @@ body {
     .addAttendee {
       text-align: center;
     }
+  }
+    .fas {
+    cursor: pointer;
   }
 }

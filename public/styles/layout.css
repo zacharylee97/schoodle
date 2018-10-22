@@ -4,68 +4,85 @@ nav {
   background-color: #2d2d2d;
   color: #e1e1e1;
 }
+
 nav span {
   font-size: 1.5rem;
 }
 
 body {
   background-color: White;
-  font-family: "Comfortaa", cursive;
+  font-family: 'Comfortaa', cursive;
 }
+
 body .homepage {
   display: flex;
   flex-direction: row;
 }
+
 body .homepage .leftbg {
   background-image: url(autumn_forest.jpg);
 }
+
 body .homepage .rightbg {
   background-image: url(autumn_forest.jpg);
 }
+
 body .homepage .homepageMessage {
   padding: 1em;
 }
+
 body .homepage .homepageMessage .picture {
   padding: 10px;
   width: 80%;
 }
+
 body .homepage .homepageBtn {
   margin: 5em auto;
 }
+
 body .homepage div {
   height: 680px;
   width: 400px;
 }
+
 body .homepage div:nth-of-type(2) {
   min-width: 800px;
   text-align: center;
 }
+
 body .new-event {
   width: 55%;
   margin: 0 auto;
   text-align: center;
 }
+
 body .new-event .calendar {
   padding: 10px 0;
 }
+
 body .new-event .calendarCell:hover {
   cursor: pointer;
 }
+
 body .new-event .calendarOutsideMonth:hover {
   cursor: default;
 }
+
 body .new-event .calendarTable {
   margin: 0;
   padding: 5px;
   float: left;
 }
+
 body .new-event .calendarTable .calendarCell {
   border: 1px solid transparent;
   padding: 5px;
 }
+
 body .new-event .calendarTable .calendarSelectedCell {
   border: 1px solid #000;
 }
+
 body .new-event .calendarHeader {
   display: flex;
   justify-content: space-between;
@@ -73,54 +90,67 @@ body .new-event .calendarHeader {
   padding: 5px;
   text-align: left;
 }
+
 body .new-event .calendarHeader .fa-arrow-left {
   margin: 5px 10px;
 }
+
 body .new-event .calendarHeader .fa-arrow-right {
   margin: 5px 10px;
 }
+
 body .new-event .times {
   margin-left: 50px;
   float: left;
 }
+
 body .new-event .times .timeslot-header {
   margin: 0;
 }
+
 body .new-event .times .add-time {
   width: 50px;
 }
+
 body .new-event .times .add-timeslot:hover {
   cursor: pointer;
 }
+
 body .new-event .submit {
   display: none;
   float: right;
   margin: 10px;
 }
+
 body .new-event .submit:hover {
   cursor: pointer;
 }
+
 body .event-details {
   width: 55%;
   margin: 0 auto;
 }
+
 body .event-details .newAvailability {
   cursor: pointer;
 }
-body .event-details .fas {
-  cursor: pointer;
-}
+
 body .event-details .notAvailable {
   background-color: #f13e3e;
 }
+
 body .event-details .available {
   background-color: #0fb10f;
 }
+
 body .event-details .add-attendee {
   width: 150px;
 }
+
 body .event-details .addAttendee {
   text-align: center;
 }
 
-/*# sourceMappingURL=layout.css.map */
+body .fas {
+  cursor: pointer;
+}
