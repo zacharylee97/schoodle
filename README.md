@@ -1,7 +1,6 @@
 # Node Skeleton
 
 A simple doodle clone for you and your friends to organize an event with multiple time possibilities.
-Mid-term project with [Zachary](https://github.com/zacharylee97)
 
 ## Getting Started
 
@@ -32,4 +31,4 @@ Mid-term project with [Zachary](https://github.com/zacharylee97)
 
 ## Screenshots
 
-!["Screenshot of an event"](https://github.com/Levasseur-Sp/schoodle/blob/master/public/images/event-sample.png)
+!["Screenshot of an event"](./public/images/event-sample.png)
